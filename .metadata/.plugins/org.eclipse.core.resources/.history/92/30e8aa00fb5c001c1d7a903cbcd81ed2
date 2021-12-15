@@ -1,0 +1,14 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.mobilerechargeapk.model.Admin;
+
+public class AdminDao {
+    public Admin validateAdmin(String userNAme,String password)
+    {
+    	
+    }
+}

@@ -1,0 +1,11 @@
+package com.mobilerechargeapk.dao;
+
+import com.mobilerechargeapk.model.User;
+
+public class UserDao {
+	
+		
+	
+	}
+
+}

@@ -1,0 +1,21 @@
+package com.mobilerechargeapk.test;
+
+import java.util.Scanner;
+
+import com.mobilerechargeapk.dao.AdminDao;
+import com.mobilerechargeapk.model.Admin;
+
+public class MobileRechargeMain {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		System.out.println();
+		int adminId=Integer.parseInt(scan.nextLine());
+		String adminName=scan.nextLine();
+		String password=scan.nextLine();
+		Admin ad=new Admin(adminId,adminName,password);
+		AdminDao da=new AdminDao();
+		da.AdminDatabase(ad);
+	}
+
+}

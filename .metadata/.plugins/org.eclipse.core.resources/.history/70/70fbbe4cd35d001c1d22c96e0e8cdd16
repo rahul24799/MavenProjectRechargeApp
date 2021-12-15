@@ -1,0 +1,145 @@
+package com.mobilerechargeapk.test;
+
+import java.util.Scanner;
+
+import com.mobilerechargeapk.dao.AdminDao;
+import com.mobilerechargeapk.dao.OperatorDao;
+import com.mobilerechargeapk.dao.UserDao;
+import com.mobilerechargeapk.model.Admin;
+import com.mobilerechargeapk.model.Operator;
+import com.mobilerechargeapk.model.User;
+
+public class MobileRechargeMain {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		System.out.println(" Admin login");
+		char correct='y';
+		while(correct=='y') {
+			String adminName=null;
+			do {
+	    System.out.println("enter the Admin name");
+		 adminName=scan.nextLine();
+		if(!adminName.matches("[a-zA-Z]+{20}")){
+	     	System.out.println("invalid admin name");
+		}
+		if(adminName.isEmpty()) {
+			System.out.println("invalid name");
+		}
+		}while(!adminName.matches("[a-zA-Z]+{20}") ||adminName.isEmpty());
+			
+		String password=null;
+		do{
+		System.out.println("enter the pwd");
+		 password=scan.nextLine();
+		if(!password.matches("[0-9a-zA-Z@#*]+{8}")) {
+			System.out.println("invalid password");
+		}
+		if(password.isEmpty()) {
+			System.out.println("password invalid");
+		}
+		}while(!password.matches("[0-9]+{8}") && password.isEmpty());
+	    AdminDao adminDao=new AdminDao();
+	    boolean result=false;
+	    result=adminDao.validateAdmin(adminName, password);
+	    UserDao userdao=null;
+	    
+	    if(result!=false)
+	    {
+		System.out.println("\n1.Register\n2.login \n Enter your choice");
+		int choice=Integer.parseInt(scan.nextLine());
+		
+		switch(choice) {
+		case 1:
+			String name=null;
+			long number=0;
+			Double wallet=0.;
+			do {
+			System.out.println("Enter User Name:");
+			name=scan.nextLine();
+			if(!name.matches("[a-zA-z]+{20}")) {
+				System.out.println("Enter the valid username");
+			}
+			if(name.isEmpty()) {
+			System.out.println("name can not be empty");
+		    }
+		    }while(!name.matches("[a-zA-z]+{20}")||name.isEmpty());
+			
+			String mail=null;
+			do {
+			System.out.println("Enter Email_id:");
+			 mail=scan.nextLine();
+			if(!mail.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+{30}")) {
+		    System.out.println("Enter valid mail address");
+			}
+			if(mail.isEmpty()) {
+			System.out.println("Mail cannot be empty");
+		    }
+		    }while(!mail.matches("[a-z][a-z 0-9]+[@][a-z]+[.][a-z]+{2,3}") || mail.isEmpty());
+			
+			String tempnum=null;
+			do {
+			System.out.println("Enter Mobile number:");
+		     tempnum=scan.nextLine();
+		     if(!tempnum.matches("[0-9]{10}")) {
+		    	 System.out.println("enter valid 10 digit mobile number");
+		     }
+		    if(tempnum.isEmpty()) {
+		    	System.out.println("mobile number do not empty");
+		    }
+			}while(!tempnum.matches("[0-9]{10}") || tempnum.isEmpty());
+			number=Long.parseLong(tempnum);
+			
+			String pwd=null;
+			do {
+		    System.out.println("Enter your password");
+		     pwd=scan.nextLine();
+		    if(!pwd.matches("[0-9a-zA-Z@#$*]+{8}")) {
+		    	System.out.println("Enter the valid password");
+		    }
+		    if(pwd.isEmpty()) {
+		    	System.out.println("Empty password cannot be valid");
+		    }
+			}while(!pwd.matches("[0-9a-zA_Z@#$*]+{8}") ||pwd.isEmpty());
+			
+			String tempwallet=null;
+			do {
+		    System.out.println("Enter your wallet");
+		     tempwallet=(scan.nextLine());
+		     if(!tempwallet.matches("[0-9]+{100,2000}")) 
+		     {
+			   System.out.println("payment wallet amount insufficient balance");
+			  }
+		    if(tempwallet.isEmpty()) {
+		    System.out.println("payment wallet is empty");
+		    }
+			}while(!tempwallet.matches("[0-9]{1000}") ||tempwallet.isEmpty());
+			wallet=Double.parseDouble(tempwallet);
+			
+			
+		    System.out.println("Enter Operator Name");
+		    String operatorName=scan.nextLine();
+//		    if(operatorName.isEmpty())
+		    Operator operator=new Operator();
+		    User user=new User(name,mail,number,pwd,wallet,operator);
+		    userdao=new UserDao();
+		    userdao.insertUser(user);
+		case 2:
+			userdao=new UserDao();
+		    System.out.println("User Login");
+		    System.out.println("Enter the  Emailid");
+		    String Emailid=scan.nextLine();
+		    User currentuser=userdao.validiateUser(Emailid,password);
+		    if(currentuser!=null) {
+		    	System.out.println(currentuser.getPassword());
+		    }
+		}
+	    }
+		else {
+	    	System.out.println("re-enter Adminname and password:");
+	    	System.out.println("Do you want to re-enter:y/n");
+	    	correct=scan.nextLine().charAt(0);
+	    }
+	 }
+  }
+}

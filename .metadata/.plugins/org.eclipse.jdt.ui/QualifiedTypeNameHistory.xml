@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.Admin"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.ConnectionClass"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.AdminDao"/>
+    <fullyQualifiedTypeName name="java.beans.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.UserDao"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.User"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.OperatorDao"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.Operator"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+</qualifiedTypeNameHistroy>

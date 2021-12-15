@@ -1,0 +1,21 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.mobilerechargeapk.model.Admin;
+
+public class AdminDao {
+      public void AdminDatabase(Admin ad) {
+    	 String insertquery="insert into admin_table values(?,?,?)";
+    	 Connection con=ConnectionClass.getConnection();
+    	  try {
+			PreparedStatement pstmt=con.prepareStatement(insertquery);
+			pstmt.setadminId
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+      }
+}

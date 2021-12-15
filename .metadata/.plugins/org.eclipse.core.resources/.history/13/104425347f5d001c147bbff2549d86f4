@@ -1,0 +1,65 @@
+package com.mobilerechargeapk.test;
+
+import java.util.Scanner;
+
+import com.mobilerechargeapk.dao.AdminDao;
+import com.mobilerechargeapk.dao.OperatorDao;
+import com.mobilerechargeapk.dao.UserDao;
+import com.mobilerechargeapk.model.Admin;
+import com.mobilerechargeapk.model.Operator;
+import com.mobilerechargeapk.model.User;
+
+public class MobileRechargeMain {
+
+	public static void main(String[] args) {
+		Scanner scan=new Scanner(System.in);
+		System.out.println("Enter the Admin login");
+		char correct='y';
+		while(correct=='y') {
+	    System.out.println("enter the name");
+		String adminName=scan.nextLine();
+		System.out.println("enter the pwd");
+		String password=scan.nextLine();
+	    AdminDao adminDao=new AdminDao();
+	    boolean result=false;
+	    result=adminDao.validateAdmin(adminName, password);
+	    UserDao userdao=null;
+	    
+	    if(result!=false)
+	    {
+		System.out.println("\n1.Register\n2.login \n Enter your choice");
+		int choice=Integer.parseInt(scan.nextLine());
+		UserDao userdao=null;
+		switch(choice) {
+		case 1:
+			
+			System.out.println("Enter User Name:");
+			String name=scan.nextLine();
+			System.out.println("Enter Email_id:");
+			String mail=scan.nextLine();
+			System.out.println("Enter Mobile number:");
+		    long number=Long.parseLong(scan.nextLine());
+		    System.out.println("Enter your password");
+		    String pwd=scan.nextLine();
+		    System.out.println("Enter your wallet");
+		    Double wallet=Double.parseDouble(scan.nextLine());
+		    System.out.println("Enter Operator Name");
+		    String operatorName=scan.nextLine();
+		    Operator operator=new Operator();
+		    
+		    User user=new User(name,mail,number,pwd,wallet,operator);
+		    userdao=new UserDao();
+		    
+		    
+		    userdao.insertUser(user);
+			
+		
+		}
+		}
+		else {
+	    	System.out.println("re-enter username and password:");
+	    	System.out.println("Do you want to re-enter:y/n");
+	    	correct=scan.nextLine().charAt(0);
+	    }
+	    }
+}}

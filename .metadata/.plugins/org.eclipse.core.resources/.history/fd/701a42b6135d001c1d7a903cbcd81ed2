@@ -1,0 +1,12 @@
+package com.mobilerechargeapk.dao;
+
+import com.mobilerechargeapk.model.Operator;
+
+public class OperatorDao {
+	
+	public Operator findOperator(String name)
+	{
+		
+	}
+
+}

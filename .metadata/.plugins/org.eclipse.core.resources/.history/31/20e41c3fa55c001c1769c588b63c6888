@@ -1,0 +1,11 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+
+import com.mobilerechargeapk.model.Admin;
+
+public class AdminDao {
+      public void AdminDatabase(Admin ad) {
+      Connection con=new Connection();
+      }
+}

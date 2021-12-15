@@ -1,0 +1,36 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.mobilerechargeapk.model.User;
+
+public class UserDao {
+	  
+		public void insertUser(User user) {
+		String insertQuery="insert into user_table (user_name,Email_id,phonenumber,password,wallet,operator_Id) values(?,?,?,?,?,?)";
+		ConnectionClass conclass=new ConnectionClass();
+		Connection con=conclass.getConnection();
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=con.prepareStatement(insertQuery);
+			pstmt.setString(1,user.getUsername());
+			pstmt.setString(2,user.getEmailid());
+			pstmt.setLong(3, user.getPhonenumber());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setDouble(5,user.getWallet());
+			pstmt.setInt(6, user.getOperator());
+			pstmt.executeUpdate();
+			System.out.println("value insterted successfully");
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		}
+	
+	}
+
+

@@ -1,0 +1,29 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mobilerechargeapk.model.Operator;
+
+public class OperatorDao {
+	
+	public Operator findOperator(String name)
+	{
+		Connection con=ConnectionClass.getConnection();
+		try {
+			Statement stmt=con.createStatement();
+			String Query="select * from operator_table where operator_name='"+name+"'";
+		ResultSet rs=stmt.executeQuery(Query);
+		if(rs.next()) {
+			Operator operator=new Operator(rs.getInt(1),rs.getString(2));
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.mobilerechargeapk.dao;
+
+public class OperatorDao {
+	
+	public Operator findOperatorId(String name)
+	{
+		
+	}
+
+}
