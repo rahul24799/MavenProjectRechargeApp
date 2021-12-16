@@ -62,10 +62,12 @@ public class User {
 		this.wallet = wallet;
 		this.operator = operator;
 	}
-	public User(String emailid, String password) {
-		this.emailid=emailid;
-		this.password=password;
-		
+	
+	
+	public User(String string, String emailid2, String password2) {
+		this.username=string;
+		this.emailid=emailid2;
+		this.password=password2;
 	}
 	@Override
 	public String toString() {

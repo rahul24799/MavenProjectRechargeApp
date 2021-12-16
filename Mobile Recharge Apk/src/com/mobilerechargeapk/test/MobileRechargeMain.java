@@ -1,5 +1,6 @@
 package com.mobilerechargeapk.test;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.mobilerechargeapk.dao.AdminDao;
@@ -11,17 +12,18 @@ import com.mobilerechargeapk.model.User;
 
 public class MobileRechargeMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		Scanner scan=new Scanner(System.in);
 		System.out.println(" Admin login");
-//		char correct='y';
-//		while(correct=='y') {
+		
+//char correct='y';
+//while(correct=='y') {
 			String adminName=null;
 		   do {
 	    System.out.println("enter the Admin name");
 		 adminName=scan.nextLine();
 		if(!adminName.matches("[a-zA-Z]+{20}")){
-	     	System.out.println("invalid admin name");
+	     	System.out.println("name Should be below 20 char");
 		}
 		if(adminName.isEmpty()) {
 			System.out.println("invalid name");
@@ -30,7 +32,7 @@ public class MobileRechargeMain {
 			
 		String password=null;
 		do{
-		System.out.println("enter the pwd");
+		System.out.println("enter the password");
 		 password=scan.nextLine();
 		if(!password.matches("[0-9a-zA-Z@#*]+{8}")) {
 			System.out.println("invalid password");
@@ -44,16 +46,16 @@ public class MobileRechargeMain {
 	    result=adminDao.validateAdmin(adminName, password);
 	    UserDao userdao=null;
 	    
-	    if(result!=false)
+	    if(result==false)
 	    {
-	    	System.out.println("valid succesfully");
+	    	System.out.println("");
 	    }
-	    else {
-		    	System.out.println("invalid admin");
-//		    	System.out.println("re-enter Adminname and password:");
+    else {
+//	    	System.out.println("invalid admin");
+//		    	//System.out.println("re-enter Adminname and password:");
 //		    	System.out.println("Do you want to re-enter:y/n");
 //		    	correct=scan.nextLine().charAt(0);
-		    }
+		  }
 	    
 		System.out.println("\n1.Register\n2.login \n Enter your choice");
 		int choice=Integer.parseInt(scan.nextLine());
@@ -66,25 +68,25 @@ public class MobileRechargeMain {
 			do {
 			System.out.println("Enter User Name:");
 			name=scan.nextLine();
-			if(!name.matches("[a-zA-z]+{20}")) {
-				System.out.println("Enter the valid username");
+			if(!name.matches("[a-zA-z]+{3,}")) {
+				System.out.println("Enter name maximum 3 character");
 			}
 			if(name.isEmpty()) {
 			System.out.println("name can not be empty");
 		    }
-		    }while(!name.matches("[a-zA-z]+{20}")||name.isEmpty());
+		    }while(!name.matches("[a-zA-z]+{3,}")||name.isEmpty());
 			
 			String mail=null;
 			do {
 			System.out.println("Enter Email_id:");
 			 mail=scan.nextLine();
-			if(!mail.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+{30}")) {
+			if(!mail.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+")) {
 		    System.out.println("Enter valid mail address");
 			}
 			if(mail.isEmpty()) {
 			System.out.println("Mail cannot be empty");
 		    }
-		    }while(!mail.matches("[a-z][a-z 0-9]+[@][a-z]+[.][a-z]+{2,3}") || mail.isEmpty());
+		    }while(!mail.matches( "[a-z][a-z0-9]+[@][a-z]+[.][a-z]+") || mail.isEmpty());
 			
 			String tempnum=null;
 			do {
@@ -103,13 +105,13 @@ public class MobileRechargeMain {
 			do {
 		    System.out.println("Enter your password");
 		     pwd=scan.nextLine();
-		    if(!pwd.matches("[0-9a-zA-Z@#$*]+{8}")) {
+		    if(!pwd.matches("[0-9a-zA-Z@#$*]{8,16}")) {
 		    	System.out.println("Enter the valid password");
 		    }
 		    if(pwd.isEmpty()) {
 		    	System.out.println("Empty password cannot be valid");
 		    }
-			}while(!pwd.matches("[0-9a-zA_Z@#$*]+{8}") ||pwd.isEmpty());
+			}while(!pwd.matches("[0-9a-zA_Z@#$*]{8,16}") ||pwd.isEmpty());
 			
 			String tempwallet=null;
 			do {
@@ -130,45 +132,55 @@ public class MobileRechargeMain {
 		    String operatorName=scan.nextLine();
 //		    if(operatorName.isEmpty())
 		    Operator operator=new Operator();
+		    operator.setOperatorname(operatorName);
 		    User user=new User(name,mail,number,pwd,wallet,operator);
 		    userdao=new UserDao();
 		    userdao.insertUser(user);
 		    
+		    
 		case 2:
+			//user=new User();
 			String Emailid=null;
 			userdao=new UserDao();
 		    System.out.println("User Login");
 		    do {
 		    System.out.println("Enter the  Emailid");
 		     Emailid=scan.nextLine();
-		    if(!Emailid.matches("[a-z][a-z 0-9]+[@][a-z]+[.][a-z]+{2,3}"));{
-		    	System.out.println("give correct email id");
+		    if(!Emailid.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+")){
+		    	System.out.println("valid email id");
 		    }
 		     
 		    if(Emailid.isEmpty()) {
 		    	System.out.println("invalid mailid");
 		    }
-		    }while(!Emailid.matches("[a-z][a-z 0-9]+[@][a-z]+[.][a-z]+{2,3}") || Emailid.isEmpty());
-		    
+		    }while(!Emailid.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+") || Emailid.isEmpty());
+		   
 		     do {
 		     System.out.println("enter the password");
 		     password=scan.nextLine();
-		     if(!password.matches("[0-9a-zA-Z@#$*]+{8}")) {
+		     if(!password.matches("[0-9a-zA-Z@#$*]{8,16}")) {
 		     System.out.println("invalid password");
 		   }
 		    if(password.isEmpty()) {
 		    System.out.println("password should be filled");
-		  }
-		    } while(!password.matches("[0-9a-zA-Z@#$*]+{8}") ||password.isEmpty());
-		    User currentuser=userdao.validiateUser(Emailid,password);
-		    if(currentuser!=null) {
-		    	System.out.println(currentuser.getPassword());
-		    	
+		   }
+		    } 
+		     while(!password.matches("[0-9a-zA-Z@#$*]{8,16}") ||password.isEmpty());
+		     
+		    User currentUser=userdao.validiateUser(Emailid,password);
+		    if(currentUser!=null) {
+		    	System.out.println("welcome"+" "+currentUser.getUsername());
 		     }
+		    else {
+		    	System.out.println("invalid entry");
+		    }
+		    
+		    
+		    
 		    
 		}	
 	  }
 		
 	 }
-//  }
+// }
 
