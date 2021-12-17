@@ -13,7 +13,7 @@ public class UserDao {
 		public void insertUser(User user) throws SQLException {
 			ConnectionClass conclass=new ConnectionClass();
 			Connection con=conclass.getConnection();
-			String subQue="select * from operator_table where operator_name=?";	
+			String subQue="select * from operator_details where operator_name=?";	
 	    PreparedStatement pst=con.prepareStatement(subQue);
 	   // System.out.println(user.getOperator().getOperatorname());
 	    pst.setString(1, user.getOperator().getOperatorname());
@@ -23,7 +23,7 @@ public class UserDao {
 	    opId=rs.getInt(1);
 	   }	
 	    System.out.println(opId);
-			String insertQuery="insert into user_table (user_name,Email_id,phone_number,password,wallet,operator_Id) values(?,?,?,?,?,?)";
+			String insertQuery="insert into userlogin (user_name,Email_id,phone_number,password,wallet,operator_Id) values(?,?,?,?,?,?)";
 
 		PreparedStatement pstmt=con.prepareStatement(insertQuery);
 
@@ -42,7 +42,7 @@ public class UserDao {
 	}
 		public User validiateUser(String Emailid,String password)
 		{
-			String Query="select * from user_table where Email_Id='"+Emailid+"' and password='"+password+"'";
+			String Query="select * from userlogin where Email_Id='"+Emailid+"' and password='"+password+"'";
 			Connection con=ConnectionClass.getConnection();
 			User user=null;
 			try {

@@ -1,0 +1,13 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+
+public class BsnlDao {
+	public boolean insertBsnlnetwork() {
+		ConnectionClass conclass=new ConnectionClass();
+	    Connection con=conclass.getConnection();
+		return false;
+		
+	}
+
+}

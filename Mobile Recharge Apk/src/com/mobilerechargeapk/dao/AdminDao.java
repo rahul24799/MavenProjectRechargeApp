@@ -13,7 +13,7 @@ public class AdminDao {
     public boolean validateAdmin(String userName,String password)
     {
     	Connection con=ConnectionClass.getConnection();
-    	String insertQuery="select * from Admin_table where Admin_name='"+userName+"' and password='"+password+"' ";
+    	String insertQuery="select * from Admin where Admin_name='"+userName+"' and password='"+password+"' ";
     	boolean flag=false;
     	try {
 			Statement st=con.createStatement();

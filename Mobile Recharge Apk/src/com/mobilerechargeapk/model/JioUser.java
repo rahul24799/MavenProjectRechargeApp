@@ -3,18 +3,14 @@ package com.mobilerechargeapk.model;
 import java.util.Objects;
 
 public class JioUser {
-	private int jioplanId;
+	
 	private String planName;
 	private double price;
 	private  String validity;
 	private String benfits;
-	private int operatorId;
-	public int getJioplanId() {
-		return jioplanId;
-	}
-	public void setJioId(int jioId) {
-		this.jioplanId = jioId;
-	}
+	private Operator operatorId;
+	
+	
 	public String getPlanName() {
 		return planName;
 	}
@@ -39,19 +35,18 @@ public class JioUser {
 	public void setBenfits(String benfits) {
 		this.benfits = benfits;
 	}
-	public int getOperatorId() {
+	public Operator getOperatorId() {
 		return operatorId;
 	}
-	public void setOperatorId(int operatorId) {
+	public void setOperatorId(Operator operatorId) {
 		this.operatorId = operatorId;
 	}
 	public JioUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public JioUser(int jioId, String planName, double price, String validity, String benfits, int operatorId) {
+	public JioUser(String planName, double price, String validity, String benfits, Operator operatorId) {
 		super();
-		this.jioplanId = jioId;
 		this.planName = planName;
 		this.price = price;
 		this.validity = validity;
@@ -60,12 +55,12 @@ public class JioUser {
 	}
 	@Override
 	public String toString() {
-		return "JioplanUser [jioId=" + jioplanId + ", planName=" + planName + ", price=" + price + ", validity=" + validity
-				+ ", benfits=" + benfits + ", operatorId=" + operatorId + "]";
+		return "JioUser [planName=" + planName + ", price=" + price + ", validity=" + validity + ", benfits=" + benfits
+				+ ", operatorId=" + operatorId + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(benfits, jioplanId, operatorId, planName, price, validity);
+		return Objects.hash(benfits, operatorId, planName, price, validity);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -76,12 +71,11 @@ public class JioUser {
 		if (getClass() != obj.getClass())
 			return false;
 		JioUser other = (JioUser) obj;
-		return Objects.equals(benfits, other.benfits) && jioplanId == other.jioplanId && operatorId == other.operatorId
+		return Objects.equals(benfits, other.benfits) && operatorId == other.operatorId
 				&& Objects.equals(planName, other.planName)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& Objects.equals(validity, other.validity);
 	}
-	
 	
 
 }

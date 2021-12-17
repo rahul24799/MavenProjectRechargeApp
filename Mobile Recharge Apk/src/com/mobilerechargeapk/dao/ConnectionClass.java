@@ -19,7 +19,7 @@ public class ConnectionClass {
 			{
 				
 				e.getMessage();
-				System.out.println("Driver fjar doesn't there");
+				System.out.println("Driver jar doesn't there");
 			}catch(SQLException e) {
 				e.getMessage();
 				System.out.println("url or username or password may wrong");

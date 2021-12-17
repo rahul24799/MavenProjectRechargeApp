@@ -1,0 +1,28 @@
+package com.mobilerechargeapk.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.mobilerechargeapk.model.JioUser;
+
+public class JioDao {
+    public void insertJionetwork(JioUser jio){
+       String insertQuery="insert into jio(plan_name,price,validity,benefits,operator_id)values(?,?,?,?,?)";
+       ConnectionClass conclass=new ConnectionClass();
+       Connection con=conclass.getConnection();
+       try {
+		PreparedStatement pstmt=con.prepareStatement(insertQuery);
+		pstmt.setString(1,jio.getPlanName() );
+		pstmt.setDouble(2, jio.getPrice());
+		pstmt.setString(3,jio.getValidity());
+		pstmt.setString(4,jio.getBenfits());
+		pstmt.setObject(4, jio.getOperatorId());
+		pstmt.execute();
+		System.out.println("value inserted succesfully");
+	} catch (SQLException e) {
+	
+		e.printStackTrace();
+	}
+    }
+}

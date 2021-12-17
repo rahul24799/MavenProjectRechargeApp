@@ -6,6 +6,7 @@ public class Operator {
 	private int operatorId;
 	private String operatorname;
 	
+	
 	public int getOperatorId() {
 		return operatorId;
 	}
