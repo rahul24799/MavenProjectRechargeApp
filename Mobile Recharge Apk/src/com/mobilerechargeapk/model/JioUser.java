@@ -8,7 +8,7 @@ public class JioUser {
 	private double price;
 	private  String validity;
 	private String benfits;
-	private Operator operatorId;
+	private Operator operator;
 	
 	
 	public String getPlanName() {
@@ -35,32 +35,32 @@ public class JioUser {
 	public void setBenfits(String benfits) {
 		this.benfits = benfits;
 	}
-	public Operator getOperatorId() {
-		return operatorId;
+	public Operator getOperator() {
+		return operator;
 	}
-	public void setOperatorId(Operator operatorId) {
-		this.operatorId = operatorId;
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
 	public JioUser() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public JioUser(String planName, double price, String validity, String benfits, Operator operatorId) {
+	public JioUser(String planName, double price, String validity, String benfits, Operator operator) {
 		super();
 		this.planName = planName;
 		this.price = price;
 		this.validity = validity;
 		this.benfits = benfits;
-		this.operatorId = operatorId;
+		this.operator = operator;
 	}
 	@Override
 	public String toString() {
 		return "JioUser [planName=" + planName + ", price=" + price + ", validity=" + validity + ", benfits=" + benfits
-				+ ", operatorId=" + operatorId + "]";
+				+ ", operator=" + operator + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(benfits, operatorId, planName, price, validity);
+		return Objects.hash(benfits, operator, planName, price, validity);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -71,11 +71,10 @@ public class JioUser {
 		if (getClass() != obj.getClass())
 			return false;
 		JioUser other = (JioUser) obj;
-		return Objects.equals(benfits, other.benfits) && operatorId == other.operatorId
+		return Objects.equals(benfits, other.benfits) && Objects.equals(operator, other.operator)
 				&& Objects.equals(planName, other.planName)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& Objects.equals(validity, other.validity);
 	}
 	
-
 }

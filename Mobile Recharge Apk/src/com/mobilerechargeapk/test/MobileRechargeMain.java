@@ -15,48 +15,113 @@ import com.mobilerechargeapk.model.User;
 public class MobileRechargeMain {
 
 	public static void main(String[] args) throws SQLException {
-		Scanner scan=new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Welcome to recharge app");
 		System.out.println(" Admin login");
-		
-//char correct='y';
-//while(correct=='y') {
-		String adminName = null;
-		do {
-			System.out.println("enter the Admin name");
-			adminName = scan.nextLine();
-			if (!adminName.matches("[a-zA-Z]+{20}")) {
-				System.out.println("name Should be below 20 char");
-			}
-			if (adminName.isEmpty()) {
-				System.out.println("invalid name");
-			}
-		} while (!adminName.matches("[a-zA-Z]+{20}") || adminName.isEmpty());
-
-		String password = null;
-		do {
-			System.out.println("enter the password");
-			password = scan.nextLine();
-			if (!password.matches("[0-9a-zA-Z@#*]+{8}")) {
-				System.out.println("invalid password");
-			}
-			if (password.isEmpty()) {
-				System.out.println("password invalid");
-			}
-		} while (!password.matches("[0-9a-zA-Z@#*]+{8}") && password.isEmpty());
-		AdminDao adminDao = new AdminDao();
 		boolean result = false;
-		result = adminDao.validateAdmin(adminName, password);
-		UserDao userdao = null;
+		do {
+			String adminName = null;
+			do {
+				System.out.println("enter the Admin name");
+				adminName = scan.nextLine();
+				if (!adminName.matches("[a-zA-Z]+{20}")) {
+					System.out.println("name Should be below 20 char");
+				}
+				if (adminName.isEmpty()) {
+					System.out.println("invalid name");
+				}
+			} while (!adminName.matches("[a-zA-Z]+{20}") || adminName.isEmpty());
 
-		if (result == false) {
-			System.out.println("");
-		} else {
-//	    	System.out.println("invalid admin");		    	
+			String password = null;
+			do {
+				System.out.println("enter the password");
+				password = scan.nextLine();
+				if (!password.matches("[0-9a-zA-Z@#*]+{8}")) {
+					System.out.println("invalid password");
+				}
+				if (password.isEmpty()) {
+					System.out.println("password invalid");
+				}
+			} while (!password.matches("[0-9a-zA-Z@#*]+{8}") && password.isEmpty());
+			AdminDao adminDao = new AdminDao();
+
+			result = adminDao.validateAdmin(adminName, password);
+			if (result == false) {
+				System.out.println("invalid ");
+			} else {
+				System.out.println("valid successfully");
+			}
+		} while (result != true);
+
+		System.out.println("Enter your  Network \n1.jio \n2.Airtel \n3.Vodafone \n4.Bsnl");
+		int choice1 = Integer.parseInt(scan.nextLine());
+		
+		switch (choice1) {
+		
+		case 1:
+			System.out.println("\n1.insert jio_plan \n2.updated jio_plan \n3.delete jio_plan");
+			int jiochoice = Integer.parseInt(scan.nextLine());
+			switch(jiochoice) {
+			
+		
+			case 1:
+				String planName=null;
+				Double price=null;
+				String validity=null;
+				String benefits=null;
+				JioDao jiodao = null;
+				boolean b = false;
+				jiodao = new JioDao();
+				System.out.println("search the planName");
+				 planName = scan.nextLine();
+				System.out.println("Enter plan price ");
+				 price = Double.parseDouble(scan.nextLine());
+				System.out.println("Enter the validity");
+				validity = scan.nextLine();
+				System.out.println("Enter the benefits");
+				 benefits = scan.nextLine();
+				System.out.println("Enter operator name");
+				String operatorName = scan.nextLine();
+				Operator operator = OperatorDao.findOperator(operatorName);
+				JioUser jiouser = new JioUser(planName, price, validity, benefits, operator);
+				jiodao = new JioDao();
+				b = jiodao.insertJionet(jiouser);
+				if (b == true) {
+					System.out.println("inserted successfully");
+				} else {
+					System.out.println("error");
+				}
+				break;
+				
+		case 2:
+			String planName1=null;
+			Double price1=null;
+			String validity1=null;
+			String benefits1=null;
+			jiodao = new JioDao();
+			System.out.println("update the planName");
+			planName1 = scan.nextLine();
+			System.out.println("update the price");
+			price1 = Double.parseDouble(scan.nextLine());
+			System.out.println("update the plan validity");
+			 validity1 = scan.nextLine();
+			System.out.println("update the plan benefits");
+			benefits1 = scan.nextLine();
+			
+			boolean b1 = jiodao.updateJio(planName1,price1,validity1, benefits1);
+			if (b1 == true) {
+				System.out.println("updated sucessfully");
+			} else {
+				System.out.println("updated Not properly");
+			}
+			break;
+			}
+			
 		}
 
 		System.out.println("\n1.Register\n2.login \n Enter your choice");
 		int choice = Integer.parseInt(scan.nextLine());
-
+		UserDao userdao = null;
 		switch (choice) {
 		case 1:
 			String name = null;
@@ -125,8 +190,7 @@ public class MobileRechargeMain {
 
 			System.out.println("Enter Operator Name");
 			String operatorName = scan.nextLine();
-			Operator operator = new Operator();
-			operator.setOperatorname(operatorName);
+			Operator operator = OperatorDao.findOperator(operatorName);
 			User user = new User(name, mail, number, pwd, wallet, operator);
 			userdao = new UserDao();
 			userdao.insertUser(user);
@@ -147,7 +211,7 @@ public class MobileRechargeMain {
 					System.out.println("invalid mailid");
 				}
 			} while (!Emailid.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+") || Emailid.isEmpty());
-
+			String password = null;
 			do {
 				System.out.println("enter the password");
 				password = scan.nextLine();
@@ -165,32 +229,9 @@ public class MobileRechargeMain {
 			} else {
 				System.out.println("invalid entry");
 			}
-
-			System.out.println("Enter your network \n1.jio \n2.Airtel \n3.Vodafone \n4.Bsnl");
-			int choice1 = Integer.parseInt(scan.nextLine());
-
-             boolean b=false;
-			JioDao jiodao = new JioDao();
-			System.out.println("search the plan");
-			String planname = scan.nextLine();
-			System.out.println("Enter plan price ");
-			double price = Double.parseDouble(scan.nextLine());
-			System.out.println("Enter the validity");
-			String validity = scan.nextLine();
-			System.out.println("Enter the benefits");
-			String benefits=scan.nextLine();
-			System.out.println("Enter operator name");
-			String operatorjio = scan.nextLine();
-			Operator operator1 = new Operator();
-			operator1.setOperatorname(operatorjio);
-			JioUser jiouser = new JioUser(planname,price,validity,benefits,operator1);
-	        jiodao=new JioDao();
-	        b=jiodao.insertJionetwork(jiouser);
-	        System.out.println("insert sucessfully");
-	        
-
+			break;
 		}
+
 	}
 
 }
-// }

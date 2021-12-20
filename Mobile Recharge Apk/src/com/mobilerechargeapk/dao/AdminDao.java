@@ -19,11 +19,8 @@ public class AdminDao {
 			Statement st=con.createStatement();
 			ResultSet rs=st.executeQuery(insertQuery);
 			if(rs.next()) {
-				System.out.println("validate successfully");
+				
 				flag=true;
-			}
-			else {
-				flag=false;
 			}
 			
 		} catch (SQLException e) {

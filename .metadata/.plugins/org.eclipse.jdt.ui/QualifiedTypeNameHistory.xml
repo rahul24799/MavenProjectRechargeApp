@@ -6,13 +6,18 @@
     <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.ConnectionClass"/>
     <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.AdminDao"/>
     <fullyQualifiedTypeName name="java.beans.Statement"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.UserDao"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.User"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.OperatorDao"/>
-    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.Operator"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.dao.JioDao"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.AirtelUser"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.JioUser"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.Operator"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.User"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.VodafoneUser"/>
+    <fullyQualifiedTypeName name="com.mobilerechargeapk.model.BsnlUser"/>
 </qualifiedTypeNameHistroy>

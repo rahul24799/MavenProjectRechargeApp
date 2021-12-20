@@ -3,13 +3,11 @@ package com.mobilerechargeapk.model;
 import java.util.Objects;
 
 public class AirtelUser {
-	private int airtelplanId;
-	public int getAirtelplanId() {
-		return airtelplanId;
-	}
-	public void setAirtelplanId(int airtelplanId) {
-		this.airtelplanId = airtelplanId;
-	}
+	private String planName;
+	private double price;
+	private  String validity;
+	private String benfits;
+	private Operator operator;
 	public String getPlanName() {
 		return planName;
 	}
@@ -34,39 +32,32 @@ public class AirtelUser {
 	public void setBenfits(String benfits) {
 		this.benfits = benfits;
 	}
-	public int getOperatorId() {
-		return operatorId;
+	public Operator getOperator() {
+		return operator;
 	}
-	public void setOperatorId(int operatorId) {
-		this.operatorId = operatorId;
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
-	private String planName;
-	private double price;
-	private  String validity;
-	private String benfits;
-	private int operatorId;
 	public AirtelUser() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public AirtelUser(int airtelplanId, String planName, double price, String validity, String benfits,
-			int operatorId) {
+	public AirtelUser(String planName, double price, String validity, String benfits, Operator operator) {
 		super();
-		this.airtelplanId = airtelplanId;
 		this.planName = planName;
 		this.price = price;
 		this.validity = validity;
 		this.benfits = benfits;
-		this.operatorId = operatorId;
+		this.operator = operator;
 	}
 	@Override
 	public String toString() {
-		return "AirtelUser [airtelplanId=" + airtelplanId + ", planName=" + planName + ", price=" + price
-				+ ", validity=" + validity + ", benfits=" + benfits + ", operatorId=" + operatorId + "]";
+		return "AirtelUser [planName=" + planName + ", price=" + price + ", validity=" + validity + ", benfits="
+				+ benfits + ", operator=" + operator + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(airtelplanId, benfits, operatorId, planName, price, validity);
+		return Objects.hash(benfits, operator, planName, price, validity);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -77,10 +68,11 @@ public class AirtelUser {
 		if (getClass() != obj.getClass())
 			return false;
 		AirtelUser other = (AirtelUser) obj;
-		return airtelplanId == other.airtelplanId && Objects.equals(benfits, other.benfits)
-				&& operatorId == other.operatorId && Objects.equals(planName, other.planName)
+		return Objects.equals(benfits, other.benfits) && Objects.equals(operator, other.operator)
+				&& Objects.equals(planName, other.planName)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& Objects.equals(validity, other.validity);
 	}
+	
 	
 }

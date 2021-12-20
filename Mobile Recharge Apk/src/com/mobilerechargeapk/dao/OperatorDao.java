@@ -12,18 +12,15 @@ public class OperatorDao {
 	public static Operator findOperator(String name)
 	{
 		Operator operator=null;
-	Operator operator1=null;
+
 		Connection con=ConnectionClass.getConnection();
 		try {
 			Statement stmt=con.createStatement();
-			String Query="select * from operator_table where operator_name='"+name+"'";
+			String Query="select * from operator_details where operator_name='"+name+"'";
 		ResultSet rs=stmt.executeQuery(Query);
 		if(rs.next()) {
 			 operator=new Operator(rs.getInt(1),rs.getString(2));
-//			 
-		if(rs.next()) {
-			operator1=new Operator(rs.getInt(1),rs.getString(2));
-		}
+			 
 		}
 		} catch (SQLException e) {
 			
@@ -31,6 +28,9 @@ public class OperatorDao {
 		}
 		return operator;
 	}
+	
+		
+	
 	
 
 }
