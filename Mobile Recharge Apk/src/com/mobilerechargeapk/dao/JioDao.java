@@ -34,7 +34,7 @@ public class JioDao {
 			}
 			System.out.println(opId);
 			pstmt.setInt(5, opId);
-			pstmt.executeUpdate();
+	     	pstmt.executeUpdate();
 //			ResultSet r=pstmt.executeQuery();
 			flag = true;
 
@@ -45,8 +45,8 @@ public class JioDao {
 		return flag;
 	}
 
-	public boolean updateJio(String planName1, Double price1, String validity1, String benefits1) {
-		String updateQuery = "update table jio_plans set price=?,validity=?,benefits=? where jioplan_id=?";
+	public boolean updateJio(String planName1, Double price1, String validity1, String benefits1, int jioplanId) {
+		String updateQuery = "update jio_plans set plan_name=?,price=?,validity=?,benefits=? where jioplan_id=?";
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
 		boolean flag = false;
@@ -57,8 +57,7 @@ public class JioDao {
 			pstmt.setDouble(2, price1);
 			pstmt.setString(3, validity1);
 			pstmt.setString(4, benefits1);
-			
-		
+			pstmt.setInt(5, jioplanId);
 			flag = pstmt.executeUpdate() > 0;
 
 		} catch (SQLException e) {
@@ -68,54 +67,71 @@ public class JioDao {
 		return flag;
 	}
 
-	public boolean deleteJio(JioUser jio) {
-		String deleteQuery = "delete table jio_plans where plan_name=?";
+	public boolean deleteJio(int jioplanId) {
+
+		String deleteQuery = "delete from jio_plans where jioplan_id=?";
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
 		boolean flag = false;
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(deleteQuery);
-			pstmt.setString(1, jio.getPlanName());
-			pstmt.executeUpdate();
-			System.out.println("deleted succesfully");
+
+			pstmt.setInt(1, jioplanId);
+			flag = pstmt.executeUpdate() > 0;
+
 		} catch (SQLException e) {
-			System.out.println("deleted not properly");
+			System.out.println("error");
 			e.printStackTrace();
 		}
 		return flag;
 	}
-//	
-//	public List<JioUser>showplan()
-//	{
-//		List<JioUser> jioList=new ArrayList<JioUser>();
-//		String showQuery="select * from jio_plans";
-//		ConnectionClass conclass=new ConnectionClass();
-//		Connection con=conclass.getConnection();
-//		
-//		try {
-//			Statement stmt=con.createStatement();
-//			ResultSet rs=stmt.executeQuery(showQuery);
-//			while(rs.next()) {
-//				String subQuery = "select * from operator_details where operator_name=?";
-//				PreparedStatement pst = con.prepareStatement(subQuery);
-//				JioUser jio;
-//				pst.setString(1,jio.getOperator().getOperatorname());
-//				ResultSet rst = pst.executeQuery();
-//				int opId = 0;
-//				if (rs.next()) {
-//					opId = rs.getInt(1);
-//				}
-////				JioUser jio1=new JioUser(rs.getString(2),Double.parseDouble(rs.getString(3)),rs.getString(4),rs.getString(5),
-////						Integer.parseInt(rs.getString(6)));
-////			}
-////		} catch (SQLException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-////		}
-////		return null;
-////		
-//	}
+
+	public List<JioUser> showJioplan() {
+		JioUser jio = null;
+		List<JioUser> jioList = new ArrayList<JioUser>();
+		String showQuery = "select * from jio_plans";
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(showQuery);
+			OperatorDao operatordao = new OperatorDao();
+			while (rs.next()) {
+				Operator operator = operatordao.findOperator(rs.getString(2));
+				jio = new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
+				jioList.add(jio);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return jioList;
+	}
+
+	public static int findjioId(String planName, Double price) {
+		String query = "select jioplan_id from jio_plans where plan_name=? and price=?";
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		PreparedStatement pstmt;
+		int jioplanId = 0;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, planName);
+			pstmt.setDouble(2, price);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				jioplanId = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return jioplanId;
+
+	}
 	
-	
+	 
+
 }

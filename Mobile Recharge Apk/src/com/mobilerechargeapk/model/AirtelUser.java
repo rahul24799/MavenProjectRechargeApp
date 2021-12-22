@@ -50,6 +50,12 @@ public class AirtelUser {
 		this.benfits = benfits;
 		this.operator = operator;
 	}
+	public AirtelUser(String string, double double1, String string2, String string3) {
+		this.planName=string;
+		this.price=double1;
+		this.validity=string2;
+		this.benfits=string3;
+	}
 	@Override
 	public String toString() {
 		return "AirtelUser [planName=" + planName + ", price=" + price + ", validity=" + validity + ", benfits="

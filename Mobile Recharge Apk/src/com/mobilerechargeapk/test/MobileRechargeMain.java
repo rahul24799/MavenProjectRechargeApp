@@ -1,123 +1,410 @@
 package com.mobilerechargeapk.test;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.mobilerechargeapk.dao.AdminDao;
+import com.mobilerechargeapk.dao.AirtelDao;
+import com.mobilerechargeapk.dao.BsnlDao;
 import com.mobilerechargeapk.dao.JioDao;
 import com.mobilerechargeapk.dao.OperatorDao;
 import com.mobilerechargeapk.dao.UserDao;
+import com.mobilerechargeapk.dao.VodafoneDao;
 import com.mobilerechargeapk.model.Admin;
+import com.mobilerechargeapk.model.AirtelUser;
+import com.mobilerechargeapk.model.BsnlUser;
 import com.mobilerechargeapk.model.JioUser;
 import com.mobilerechargeapk.model.Operator;
 import com.mobilerechargeapk.model.User;
+import com.mobilerechargeapk.model.VodafoneUser;
 
 public class MobileRechargeMain {
 
 	public static void main(String[] args) throws SQLException {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Welcome to recharge app");
-		System.out.println(" Admin login");
-		boolean result = false;
-		do {
-			String adminName = null;
-			do {
-				System.out.println("enter the Admin name");
-				adminName = scan.nextLine();
-				if (!adminName.matches("[a-zA-Z]+{20}")) {
-					System.out.println("name Should be below 20 char");
-				}
-				if (adminName.isEmpty()) {
-					System.out.println("invalid name");
-				}
-			} while (!adminName.matches("[a-zA-Z]+{20}") || adminName.isEmpty());
-
-			String password = null;
-			do {
-				System.out.println("enter the password");
-				password = scan.nextLine();
-				if (!password.matches("[0-9a-zA-Z@#*]+{8}")) {
-					System.out.println("invalid password");
-				}
-				if (password.isEmpty()) {
-					System.out.println("password invalid");
-				}
-			} while (!password.matches("[0-9a-zA-Z@#*]+{8}") && password.isEmpty());
-			AdminDao adminDao = new AdminDao();
-
-			result = adminDao.validateAdmin(adminName, password);
-			if (result == false) {
-				System.out.println("invalid ");
-			} else {
-				System.out.println("valid successfully");
-			}
-		} while (result != true);
-
-		System.out.println("Enter your  Network \n1.jio \n2.Airtel \n3.Vodafone \n4.Bsnl");
-		int choice1 = Integer.parseInt(scan.nextLine());
-		
-		switch (choice1) {
-		
-		case 1:
-			System.out.println("\n1.insert jio_plan \n2.updated jio_plan \n3.delete jio_plan");
-			int jiochoice = Integer.parseInt(scan.nextLine());
-			switch(jiochoice) {
-			
-		
-			case 1:
-				String planName=null;
-				Double price=null;
-				String validity=null;
-				String benefits=null;
-				JioDao jiodao = null;
-				boolean b = false;
-				jiodao = new JioDao();
-				System.out.println("search the planName");
-				 planName = scan.nextLine();
-				System.out.println("Enter plan price ");
-				 price = Double.parseDouble(scan.nextLine());
-				System.out.println("Enter the validity");
-				validity = scan.nextLine();
-				System.out.println("Enter the benefits");
-				 benefits = scan.nextLine();
-				System.out.println("Enter operator name");
-				String operatorName = scan.nextLine();
-				Operator operator = OperatorDao.findOperator(operatorName);
-				JioUser jiouser = new JioUser(planName, price, validity, benefits, operator);
-				jiodao = new JioDao();
-				b = jiodao.insertJionet(jiouser);
-				if (b == true) {
-					System.out.println("inserted successfully");
-				} else {
-					System.out.println("error");
-				}
-				break;
-				
-		case 2:
-			String planName1=null;
-			Double price1=null;
-			String validity1=null;
-			String benefits1=null;
-			jiodao = new JioDao();
-			System.out.println("update the planName");
-			planName1 = scan.nextLine();
-			System.out.println("update the price");
-			price1 = Double.parseDouble(scan.nextLine());
-			System.out.println("update the plan validity");
-			 validity1 = scan.nextLine();
-			System.out.println("update the plan benefits");
-			benefits1 = scan.nextLine();
-			
-			boolean b1 = jiodao.updateJio(planName1,price1,validity1, benefits1);
-			if (b1 == true) {
-				System.out.println("updated sucessfully");
-			} else {
-				System.out.println("updated Not properly");
-			}
-			break;
-			}
-			
-		}
+//		System.out.println("Welcome to recharge app");
+//		System.out.println("Admin login");
+//		boolean result = false;
+//		do {
+//			String adminName = null;
+//			do {
+//				System.out.println("enter the Admin name");
+//				adminName = scan.nextLine();
+//				if (!adminName.matches("[a-zA-Z]+{20}")) {
+//					System.out.println("name Should be below 20 char");
+//				}
+//				if (adminName.isEmpty()) {
+//					System.out.println("invalid name");
+//				}
+//			} while (!adminName.matches("[a-zA-Z]+{20}") || adminName.isEmpty());
+//
+//			String password = null;
+//			do {
+//				System.out.println("enter the password");
+//				password = scan.nextLine();
+//				if (!password.matches("[0-9a-zA-Z@#*]+{8}")) {
+//					System.out.println("invalid password");
+//				}
+//				if (password.isEmpty()) {
+//					System.out.println("password invalid");
+//				}
+//			} while (!password.matches("[0-9a-zA-Z@#*]+{8}") && password.isEmpty());
+//			AdminDao adminDao = new AdminDao();
+//
+//			result = adminDao.validateAdmin(adminName, password);
+//			if (result == false) {
+//				System.out.println("invalid ");
+//			} else {
+//				System.out.println("valid successfully");
+//			}
+//		} while (result != true);
+//
+//		System.out.println("Enter your  Network \n1.jio \n2.Airtel \n3.Vodafone \n4.Bsnl");
+//		int choice1 = Integer.parseInt(scan.nextLine());
+//
+//		char stop;
+//		switch (choice1) {
+//
+//		case 1:
+//			System.out.println("\n1.insert jio_plan \n2.updated jio_plan \n3.delete jio_plan \n4.show jio_plan");
+//			int jiochoice = Integer.parseInt(scan.nextLine());
+//
+//			String planName = null;
+//			Double price = null;
+//			String validity = null;
+//			String benefits = null;
+//			JioDao jiodao = null;
+//			switch (jiochoice) {
+//
+//			case 1:
+//				char stop1;
+//				do {
+//					boolean b = false;
+//					jiodao = new JioDao();
+//					System.out.println("Add the Jioplan");
+//					planName = scan.nextLine();
+//					System.out.println("Enter plan price ");
+//					price = Double.parseDouble(scan.nextLine());
+//					System.out.println("Enter the validity");
+//					validity = scan.nextLine();
+//					System.out.println("Enter the benefits");
+//					benefits = scan.nextLine();
+//					System.out.println("Enter operator name");
+//					String operatorName = scan.nextLine();
+//					Operator operator = OperatorDao.findOperator(operatorName);
+//					JioUser jiouser = new JioUser(planName, price, validity, benefits, operator);
+//					jiodao = new JioDao();
+//					b = jiodao.insertJionet(jiouser);
+//					if (b == true) {
+//						System.out.println("inserted successfully");
+//					} else {
+//						System.out.println("error");
+//					}
+//					System.out.println("Do you want continue ADD Jio_plan yes or no");
+//					stop1 = scan.nextLine().charAt(0);
+//				} while (stop1 == 'Y' || stop1 == 'y');
+//
+//			case 2:
+//				char stop2 = 0;
+//				do {
+//
+//					boolean b1 = false;
+//
+//					jiodao = new JioDao();
+//					System.out.println("Update the planName");
+//					String planName1 = scan.nextLine();
+//					System.out.println("update the price");
+//					Double price1 = Double.parseDouble(scan.nextLine());
+//					System.out.println("update the plan validity");
+//					String validity1 = scan.nextLine();
+//					System.out.println("update the plan benefits");
+//					String benefits1 = scan.nextLine();
+//					System.out.println("Enter the Jioplan_id");
+//					int jioplanId = Integer.parseInt(scan.nextLine());
+//
+//					b1 = jiodao.updateJio(planName1, price1, validity1, benefits1, jioplanId);
+//					if (b1 == true) {
+//						System.out.println("updated sucessfully");
+//					} else {
+//						System.out.println("updated Not properly");
+//					}
+//
+//					System.out.println("Do you want continue Update Jio_plan yes or no");
+//					stop2 = scan.nextLine().charAt(0);
+//				} while (stop2 == 'Y' || stop2 == 'y');
+//
+//			case 3:
+//				char stop3;
+//				do {
+//
+//					boolean b2 = false;
+//					System.out.println("Delete the jio plan");
+//					int jioplanId1 = Integer.parseInt(scan.nextLine());
+//					jiodao = new JioDao();
+//					b2 = jiodao.deleteJio(jioplanId1);
+//					if (b2 == true) {
+//						System.out.println("deleted succesfully");
+//					} else {
+//						System.out.println("not deleted");
+//					}
+//					System.out.println("Do you want continue Delete Jio_plan yes or no");
+//					stop3 = scan.nextLine().charAt(0);
+//				} while (stop3 == 'Y' || stop3 == 'y');
+//			case 4:
+//
+//				jiodao = new JioDao();
+//				System.out.println("List of jio_Plans");
+//				List<JioUser> jio = jiodao.showJioplan();
+//				for (int i = 0; i < jio.size(); i++) {
+//					System.out.println(jio.get(i));
+//				}
+//
+////				System.out.println("Enter plan_name which jioplan_id find");
+////				planName = scan.nextLine();
+////				System.out.println("Enter Amount which jioplan_id find");
+////				Double Price = Double.parseDouble(scan.nextLine());
+////				jiodao = new JioDao();
+////				int jioplanId1 = jiodao.findjioId(planName, Price);
+//
+//			}
+//		case 2:
+//			System.out.println(
+//					"\n1.insert Airtel_plan \n2.updated Airtel_plan \n3.delete Airtel_plan \n4.show Airtel_plan");
+//			int airtelchoice = Integer.parseInt(scan.nextLine());
+//
+//			boolean a = false;
+//			AirtelDao airteldao = null;
+//
+//			switch (airtelchoice) {
+//
+//			case 1:
+//				System.out.println("Add the Airtel Plan");
+//				planName = scan.nextLine();
+//				System.out.println("Add the plan price");
+//				price = Double.parseDouble(scan.nextLine());
+//				System.out.println("Add the plan validity");
+//				validity = scan.nextLine();
+//				System.out.println("Add the plan benfits");
+//				benefits = scan.nextLine();
+//				System.out.println("Add the operator name");
+//				String operatorname = scan.nextLine();
+//				Operator operator = OperatorDao.findOperator(operatorname);
+//				AirtelUser airteluser = new AirtelUser(planName, price, validity, benefits, operator);
+//				airteldao = new AirtelDao();
+//				a = airteldao.insertAirtelnet(airteluser);
+//				if (a == true) {
+//					System.out.println("inserted successfully");
+//				} else {
+//					System.out.println("error");
+//				}
+//				break;
+//			case 2:
+//
+//				System.out.println("Updated Airtel plan_name");
+//				planName = scan.nextLine();
+//				System.out.println("updated Airtel plan Amount");
+//				price = Double.parseDouble(scan.nextLine());
+//				System.out.println("updated Airtel plan validity");
+//				validity = scan.nextLine();
+//				System.out.println("updated Airtel plan benfits");
+//				benefits = scan.nextLine();
+//				System.out.println("Enter the Airtel plan_id");
+//				int airtelplanId = Integer.parseInt(scan.nextLine());
+//
+//				airteldao = new AirtelDao();
+//				a = airteldao.updateAirtel(planName, price, validity, benefits, airtelplanId);
+//
+//				if (a == true) {
+//					System.out.println("Airtel plan updated");
+//				} else {
+//					System.out.println("not updated");
+//				}
+//
+//				break;
+//			case 3:
+//
+//				System.out.println("Delete the Airtel_plan");
+//				int airtelplanId1 = Integer.parseInt(scan.nextLine());
+//				airteldao = new AirtelDao();
+//				a = airteldao.deleteAirtel(airtelplanId1);
+//				if (a == true) {
+//					System.out.println(" Airtel_plan succesfully deleted ");
+//				} else {
+//					System.out.println("Not deleted");
+//				}
+//				break;
+//			case 4:
+//				airteldao = new AirtelDao();
+//				System.out.println("List of airtel_Plans");
+//				List<AirtelUser> airtel = airteldao.showAirtelplan();
+//				for (int i = 0; i < airtel.size(); i++) {
+//					System.out.println(airtel.get(i));
+//				}
+//
+////				System.out.println("Enter plan_name which airtelplan_id find");
+////				planname = scan.nextLine();
+////				System.out.println("Enter Amount which airtelplan_id find");
+////				Double Price = Double.parseDouble(scan.nextLine());
+////				airteldao = new AirtelDao();
+////				int airtelPlanid = airteldao.findairtelId(planname, Price);
+//
+//			}
+//			break;
+//		case 3:
+//			System.out.println(" \n1.show Vodafone_plan \n2.insert Vodafone_plan \n3.updated Vodafone_plan"
+//					+ " \n4.delete Vodafone_plan ");
+//			int vodafonechoice = Integer.parseInt(scan.nextLine());
+//			VodafoneDao vdao = new VodafoneDao();
+//			VodafoneUser vodafone = new VodafoneUser();
+//			boolean v = false;
+//			switch (vodafonechoice) {
+//			case 1:
+////				System.out.println("Enter plan_name which vodafoneplan_id find");
+////				planname = scan.nextLine();
+////				System.out.println("Enter Amount which vodafoneplan_id find");
+////				Double Price = Double.parseDouble(scan.nextLine());
+////				vdao = new VodafoneDao();
+////				int vodafoneplanId = vdao.findvodafoneId(planname, Price);
+//
+//				vdao = new VodafoneDao();
+//				System.out.println("List of Vodafone_Plans");
+//				List<VodafoneUser> vodafone1 = vdao.showViplan();
+//				for (int i = 0; i < vodafone1.size(); i++) {
+//					System.out.println(vodafone1.get(i));
+//				}
+//				break;
+//			case 2:
+//				System.out.println("Add the Vodafone_Plan");
+//				planName = scan.nextLine();
+//				System.out.println("Add the VI plan_Amount");
+//				price = Double.parseDouble(scan.nextLine());
+//				System.out.println("Add the VI plan validity");
+//				validity = scan.nextLine();
+//				System.out.println("Add the VI plan benfits");
+//				benefits = scan.nextLine();
+//				System.out.println("Add the operator name");
+//				String operatorname = scan.nextLine();
+//				Operator operator = OperatorDao.findOperator(operatorname);
+//				vodafone = new VodafoneUser(planName, price, validity, benefits, operator);
+//				vdao = new VodafoneDao();
+//				v = vdao.vodafoneNetwork(vodafone);
+//				if (v == true) {
+//					System.out.println("inserted successfully");
+//				} else {
+//					System.out.println("error");
+//				}
+//				break;
+//			case 3:
+//				System.out.println("Updated VI plan_name");
+//				planName = scan.nextLine();
+//				System.out.println("updated VI plan Amount");
+//				price = Double.parseDouble(scan.nextLine());
+//				System.out.println("updated VI plan validity");
+//				validity = scan.nextLine();
+//				System.out.println("updated VI plan benfits");
+//				benefits = scan.nextLine();
+//				System.out.println("Enter the VI plan_id");
+//				int airtelplanId = Integer.parseInt(scan.nextLine());
+//				vdao = new VodafoneDao();
+//				v = vdao.updateVodafone(planName, price, validity, benefits, airtelplanId);
+//				if (v == true) {
+//					System.out.println("Vodafone plan _updated");
+//				} else {
+//					System.out.println("not updated");
+//				}
+//				break;
+//			case 4:
+//				System.out.println("Delete the VI_plan");
+//				int airtelplanId1 = Integer.parseInt(scan.nextLine());
+//				vdao = new VodafoneDao();
+//				v = vdao.deleteVodafone(airtelplanId1);
+//				if (v == true) {
+//					System.out.println(" Airtel_plan succesfully deleted ");
+//				} else {
+//					System.out.println("Not deleted");
+//				}
+//				break;
+//			}
+//		case 4:
+//			System.out.println("\n1.Show_bsnlplan \n2.Insert_bsnl \n3.Update_bsnl \n4.Deleted_bsnl");
+//			int bsnlchoice = Integer.parseInt(scan.nextLine());
+//			BsnlDao bdao = new BsnlDao();
+//			BsnlUser bsnl = new BsnlUser();
+//			Boolean n = false;
+//
+//			switch (bsnlchoice) {
+//			case 1:
+////				System.out.println("Enter plan_name which vodafoneplan_id find");
+////				planname = scan.nextLine();
+////				System.out.println("Enter Amount which vodafoneplan_id find");
+////				Double Price = Double.parseDouble(scan.nextLine());
+////				bdao=new BsnlDao();
+////				int bsnlplanId = bdao.findbsnlId(planname, Price);
+//
+//				bdao = new BsnlDao();
+//				System.out.println("List of Bsnl_plans");
+//				List<BsnlUser> bsnl1 = bdao.showBsnlplan();
+//				for (int i = 0; i < bsnl1.size(); i++) {
+//					System.out.println(bsnl1.get(i));
+//				}
+////				
+//			case 2:
+//				System.out.println("Add the Bsnl_plan");
+//				planName = scan.nextLine();
+//				System.out.println("Add the Bsnl plan_Amount");
+//				price = Double.parseDouble(scan.nextLine());
+//				System.out.println("Add the Bsnl plan validity");
+//				validity = scan.nextLine();
+//				System.out.println("Add the Bsnl plan benfits");
+//				benefits = scan.nextLine();
+//				System.out.println("Add the operator name");
+//				String operatorname = scan.nextLine();
+//				Operator operator = OperatorDao.findOperator(operatorname);
+//				bsnl = new BsnlUser(planName, price, validity, benefits, operator);
+//				bdao = new BsnlDao();
+//				n = bdao.insertBsnlnetwork(bsnl);
+//				if (n == true) {
+//					System.out.println("inserted successfully");
+//				} else {
+//					System.out.println("error");
+//				}
+//				break;
+//			case 3:
+//
+//				System.out.println("Updated Bsnl plan_name");
+//				planName = scan.nextLine();
+//				System.out.println("updated Bsnl plan Amount");
+//				price = Double.parseDouble(scan.nextLine());
+//				System.out.println("updated Bsnl plan validity");
+//				validity = scan.nextLine();
+//				System.out.println("updated Bsnl plan benfits");
+//				benefits = scan.nextLine();
+//				System.out.println("Enter the Bsnl plan_id");
+//				int bsnlplanId1 = Integer.parseInt(scan.nextLine());
+//				bdao = new BsnlDao();
+//				n = bdao.updateBsnl(planName, price, validity, benefits, bsnlplanId1);
+//				if (n == true) {
+//					System.out.println("Bsnl_plan updated");
+//				} else {
+//					System.out.println("not updated");
+//				}
+//
+//				break;
+//			case 4:
+//				System.out.println("Delete the Bsnl_plan");
+//				int bsnlId = Integer.parseInt(scan.nextLine());
+//				vdao = new VodafoneDao();
+//				n = bdao.deleteBsnl(bsnlId);
+//				if (n == true) {
+//					System.out.println(" Airtel_plan succesfully deleted ");
+//				} else {
+//					System.out.println("Not deleted");
+//				}
+//				break;
+//			}
+//
+//		}
 
 		System.out.println("\n1.Register\n2.login \n Enter your choice");
 		int choice = Integer.parseInt(scan.nextLine());
@@ -229,7 +516,43 @@ public class MobileRechargeMain {
 			} else {
 				System.out.println("invalid entry");
 			}
-			break;
+		case 3:
+			System.out.println("Select your NetWork \n1.Jio plan \n2.Airtel Plan \n3.Vodafone Plan \n4.BSNL plan");
+			int planchoice = Integer.parseInt(scan.nextLine());
+			switch (planchoice) {
+			
+			case 1:
+				JioDao jiodao = new JioDao();
+				System.out.println("List of jio_Plans");
+				List<JioUser> jio = jiodao.showJioplan();
+				for (int i = 0; i < jio.size(); i++) {
+					System.out.println(jio.get(i));
+				}
+			case 2:
+			AirtelDao airteldao = new AirtelDao();
+				System.out.println("List of airtel_Plans");
+				List<AirtelUser> airtel = airteldao.showAirtelplan();
+				for (int i = 0; i < airtel.size(); i++) {
+					System.out.println(airtel.get(i));
+				}
+			case 3:
+
+			VodafoneDao	vdao = new VodafoneDao();
+				System.out.println("List of Vodafone_Plans");
+				List<VodafoneUser> vodafone1 = vdao.showViplan();
+				for (int i = 0; i < vodafone1.size(); i++) {
+					System.out.println(vodafone1.get(i));
+				}
+			case 4:
+				BsnlDao bdao = new BsnlDao();
+				System.out.println("List of Bsnl_plans");
+				List<BsnlUser> bsnl1 = bdao.showBsnlplan();
+				for (int i = 0; i < bsnl1.size(); i++) {
+					System.out.println(bsnl1.get(i));
+				}
+//				
+			}
+
 		}
 
 	}

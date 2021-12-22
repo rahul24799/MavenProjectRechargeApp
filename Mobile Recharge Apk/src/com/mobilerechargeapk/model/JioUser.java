@@ -11,6 +11,9 @@ public class JioUser {
 	private Operator operator;
 	
 	
+	
+	
+	
 	public String getPlanName() {
 		return planName;
 	}
@@ -47,12 +50,14 @@ public class JioUser {
 	}
 	public JioUser(String planName, double price, String validity, String benfits, Operator operator) {
 		super();
+		
 		this.planName = planName;
 		this.price = price;
 		this.validity = validity;
 		this.benfits = benfits;
 		this.operator = operator;
 	}
+
 	@Override
 	public String toString() {
 		return "JioUser [planName=" + planName + ", price=" + price + ", validity=" + validity + ", benfits=" + benfits
