@@ -36,8 +36,8 @@ public class BsnlDao {
 			pstmt.setString(3, bsnl.getValidity());
 			pstmt.setString(4, bsnl.getBenfits());
 			pstmt.setInt(5, opId);
-			pstmt.executeUpdate();
-			flag = true;
+			flag=pstmt.executeUpdate()>0;
+		
 		} catch (SQLException e) 
 		{
 
@@ -125,7 +125,7 @@ public class BsnlDao {
 			ResultSet rs = stmt.executeQuery(showQuery);
 			OperatorDao operatordao = new OperatorDao();
 			while (rs.next()) {
-				Operator operator = operatordao.findOperator(rs.getString(2));
+				Operator operator = operatordao.findOperator1(rs.getInt(6));
 				bsnl = new BsnlUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
 				bsnlList.add(bsnl);
 			}

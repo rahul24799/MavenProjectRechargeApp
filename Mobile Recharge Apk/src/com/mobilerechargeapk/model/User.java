@@ -64,11 +64,7 @@ public class User {
 	}
 	
 	
-	public User(String string, String emailid2, String password2) {
-		this.username=string;
-		this.emailid=emailid2;
-		this.password=password2;
-	}
+	
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", emailid=" + emailid + ", phonenumber=" + phonenumber + ", password="

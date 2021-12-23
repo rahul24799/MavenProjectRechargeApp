@@ -33,9 +33,9 @@ public class AirtelDao {
 		pstmt.setDouble(2, airtel.getPrice());
 		pstmt.setString(3,airtel.getValidity());
 		pstmt.setString(4,airtel.getBenfits());
-		pstmt.setObject(5,opId);
-		pstmt.execute();
-       flag=true;   
+		pstmt.setInt(5,opId);
+		
+       flag=pstmt.executeUpdate()>0;   
 
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -60,7 +60,7 @@ public class AirtelDao {
 		pstmt.setString(4,benefits);
 		pstmt.setInt(5,airtelplanId);
 		
-		pstmt.executeUpdate();
+	flag=pstmt.executeUpdate()>0;
 		
 		
 	} 
@@ -92,7 +92,7 @@ public class AirtelDao {
 	{
 		AirtelUser airtel=null;
 		List<AirtelUser> AirtelList=new ArrayList<AirtelUser>();
-		String showQuery="select * from jio_plans";
+		String showQuery="select * from Airtel_plans";
 		ConnectionClass conclass=new ConnectionClass();
 		Connection con=conclass.getConnection();
 		try {
@@ -100,7 +100,7 @@ public class AirtelDao {
 			ResultSet rs=stmt.executeQuery(showQuery);
 			OperatorDao operatordao=new OperatorDao();
 			while(rs.next()) {
-				Operator operator=operatordao.findOperator(rs.getString(2));
+				Operator operator=operatordao.findOperator1(rs.getInt(6));
 				 airtel=new AirtelUser(rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5),operator);
 				 AirtelList.add(airtel);
 			}

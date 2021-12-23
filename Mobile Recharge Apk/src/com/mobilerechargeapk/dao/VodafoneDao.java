@@ -37,8 +37,8 @@ public class VodafoneDao {
 			pstmt.setString(3, vodafone.getValidity());
 			pstmt.setString(4, vodafone.getBenfits());
 			pstmt.setInt(5, opId);
-			pstmt.executeUpdate();
-			flag = true;
+			flag=pstmt.executeUpdate()>0;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Query will incorrect");
@@ -127,7 +127,7 @@ public class VodafoneDao {
 			ResultSet rs = stmt.executeQuery(showQuery);
 			OperatorDao operatordao = new OperatorDao();
 			while (rs.next()) {
-				Operator operator = operatordao.findOperator(rs.getString(2));
+				Operator operator = operatordao.findOperator1(rs.getInt(6));
 				vodafone = new VodafoneUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5),
 						operator);
 				vodafoneList.add(vodafone);

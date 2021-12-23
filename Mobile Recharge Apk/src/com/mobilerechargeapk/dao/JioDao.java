@@ -34,12 +34,11 @@ public class JioDao {
 			}
 			System.out.println(opId);
 			pstmt.setInt(5, opId);
-	     	pstmt.executeUpdate();
+			flag = pstmt.executeUpdate() > 0;
 //			ResultSet r=pstmt.executeQuery();
-			flag = true;
 
 		} catch (SQLException e) {
-
+			System.out.println("insert Query will in correct");
 			e.printStackTrace();
 		}
 		return flag;
@@ -61,7 +60,7 @@ public class JioDao {
 			flag = pstmt.executeUpdate() > 0;
 
 		} catch (SQLException e) {
-
+			System.out.println("Update Query will incorrect");
 			e.printStackTrace();
 		}
 		return flag;
@@ -81,7 +80,7 @@ public class JioDao {
 			flag = pstmt.executeUpdate() > 0;
 
 		} catch (SQLException e) {
-			System.out.println("error");
+			System.out.println(" Query will be error");
 			e.printStackTrace();
 		}
 		return flag;
@@ -97,13 +96,17 @@ public class JioDao {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(showQuery);
 			OperatorDao operatordao = new OperatorDao();
+
 			while (rs.next()) {
-				Operator operator = operatordao.findOperator(rs.getString(2));
+
+				Operator operator = operatordao.findOperator1(rs.getInt(6));
+
+//			System.out.println(operator);
 				jio = new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
 				jioList.add(jio);
 			}
 		} catch (SQLException e) {
-
+			System.out.println("invalid");
 			e.printStackTrace();
 		}
 		return jioList;
@@ -120,18 +123,17 @@ public class JioDao {
 			pstmt.setString(1, planName);
 			pstmt.setDouble(2, price);
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
+			if(rs.next()) {
 				jioplanId = rs.getInt(1);
+				System.out.println(rs.getInt(1));
 			}
 		} catch (SQLException e) {
-
+			System.out.println("invalid_id");
 			e.printStackTrace();
 		}
 
 		return jioplanId;
 
 	}
-	
-	 
 
 }

@@ -1,17 +1,23 @@
 package com.mobilerechargeapk.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class HistoryDetails {
-	private int historyId;
+	
 	private int userId;
-	private int operator_id;
-	private String validity;
-	public int getHistoryId() {
-		return historyId;
+	private int operatorId;
+	private long mobileNumber;
+	private int planId;
+	private Date rechargeDate;
+	
+	
+	
+	public long getMobileNumber() {
+		return mobileNumber;
 	}
-	public void setHistoryId(int historyId) {
-		this.historyId = historyId;
+	public void setMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 	public int getUserId() {
 		return userId;
@@ -19,37 +25,47 @@ public class HistoryDetails {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getOperator_id() {
-		return operator_id;
+	public int getOperatorId() {
+		return operatorId;
 	}
-	public void setOperator_id(int operator_id) {
-		this.operator_id = operator_id;
+	public void setOperatorId(int operatorId) {
+		this.operatorId = operatorId;
 	}
-	public String getValidity() {
-		return validity;
+	public int getPlanId() {
+		return planId;
 	}
-	public void setValidity(String validity) {
-		this.validity = validity;
+	public void setPlanId(int planId) {
+		this.planId = planId;
+	}
+
+	public Date getRechargeDate() {
+		return rechargeDate;
+	}
+	public void setRechargeDate(Date rechargeDate) {
+		this.rechargeDate = rechargeDate;
+	}
+	
+	
+	public HistoryDetails(int userId, int operatorId, long mobileNumber, int planId, Date rechargeDate) {
+		super();
+		this.userId = userId;
+		this.operatorId = operatorId;
+		this.mobileNumber = mobileNumber;
+		this.planId = planId;
+		this.rechargeDate = rechargeDate;
 	}
 	public HistoryDetails() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-	public HistoryDetails(int historyId, int userId, int operator_id, String validity) {
-		super();
-		this.historyId = historyId;
-		this.userId = userId;
-		this.operator_id = operator_id;
-		this.validity = validity;
+		
 	}
 	@Override
 	public String toString() {
-		return "HistoryDetails [historyId=" + historyId + ", userId=" + userId + ", operator_id=" + operator_id
-				+ ", validity=" + validity + "]";
+		return "HistoryDetails [userId=" + userId + ", operatorId=" + operatorId + ", mobileNumber=" + mobileNumber
+				+ ", planId=" + planId + ", rechargeDate=" + rechargeDate + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(historyId, operator_id, userId, validity);
+		return Objects.hash(mobileNumber, operatorId, planId, rechargeDate, userId);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -60,9 +76,10 @@ public class HistoryDetails {
 		if (getClass() != obj.getClass())
 			return false;
 		HistoryDetails other = (HistoryDetails) obj;
-		return historyId == other.historyId && operator_id == other.operator_id && userId == other.userId
-				&& Objects.equals(validity, other.validity);
+		return mobileNumber == other.mobileNumber && operatorId == other.operatorId && planId == other.planId
+				&& Objects.equals(rechargeDate, other.rechargeDate) && userId == other.userId;
 	}
 	
-
+	
+	
 }
