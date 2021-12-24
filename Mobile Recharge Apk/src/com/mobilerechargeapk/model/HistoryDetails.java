@@ -10,6 +10,7 @@ public class HistoryDetails {
 	private long mobileNumber;
 	private int planId;
 	private Date rechargeDate;
+	private Double wallet;
 	
 	
 	
@@ -45,14 +46,21 @@ public class HistoryDetails {
 		this.rechargeDate = rechargeDate;
 	}
 	
+	public Double getWallet() {
+		return wallet;
+	}
+	public void setWallet(Double wallet) {
+		this.wallet = wallet;
+	}
 	
-	public HistoryDetails(int userId, int operatorId, long mobileNumber, int planId, Date rechargeDate) {
+	public HistoryDetails(int userId, int operatorId, long mobileNumber, int planId, Date rechargeDate, Double wallet) {
 		super();
 		this.userId = userId;
 		this.operatorId = operatorId;
 		this.mobileNumber = mobileNumber;
 		this.planId = planId;
 		this.rechargeDate = rechargeDate;
+		this.wallet = wallet;
 	}
 	public HistoryDetails() {
 		super();
@@ -61,11 +69,11 @@ public class HistoryDetails {
 	@Override
 	public String toString() {
 		return "HistoryDetails [userId=" + userId + ", operatorId=" + operatorId + ", mobileNumber=" + mobileNumber
-				+ ", planId=" + planId + ", rechargeDate=" + rechargeDate + "]";
+				+ ", planId=" + planId + ", rechargeDate=" + rechargeDate + ", wallet=" + wallet + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(mobileNumber, operatorId, planId, rechargeDate, userId);
+		return Objects.hash(mobileNumber, operatorId, planId, rechargeDate, userId, wallet);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -77,8 +85,10 @@ public class HistoryDetails {
 			return false;
 		HistoryDetails other = (HistoryDetails) obj;
 		return mobileNumber == other.mobileNumber && operatorId == other.operatorId && planId == other.planId
-				&& Objects.equals(rechargeDate, other.rechargeDate) && userId == other.userId;
+				&& Objects.equals(rechargeDate, other.rechargeDate) && userId == other.userId
+				&& Objects.equals(wallet, other.wallet);
 	}
+	
 	
 	
 	

@@ -13,7 +13,7 @@ public class HistorydetailsDao {
    		ConnectionClass conclass = new ConnectionClass();
    		Connection con = conclass.getConnection();
    		
-   		String insertQuery="insert into  history_details (user_id,mobile_number,operator_id,plan_id,Recharge_date)values(?,?,?,?,?)";
+   		String insertQuery="insert into  history_details (user_id,mobile_number,operator_id,plan_id,Recharge_date,Payment)values(?,?,?,?,?,?)";
    		try {
 			PreparedStatement pstmt = con.prepareStatement(insertQuery);
 			pstmt.setInt(1,  historyDetails.getUserId());
@@ -22,6 +22,7 @@ public class HistorydetailsDao {
 			pstmt.setInt(4,historyDetails.getPlanId());
 			//pstmt.setDate(4,(Date) historyDetails.getRechargeDate());
 	        pstmt.setDate(5,new java.sql.Date(historyDetails.getRechargeDate().getTime()));
+	        pstmt.setDouble(6,historyDetails.getWallet());
 			flag=pstmt.executeUpdate()>0;
 
 

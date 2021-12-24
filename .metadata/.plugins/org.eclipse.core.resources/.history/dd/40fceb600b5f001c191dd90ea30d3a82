@@ -1,7 +1,0 @@
-package com.mobilerechargeapk.dao;
-
-public class VodafoneDao {
-  public void vodafoneNetwork() {
-	  String insertQue="insert into vodafone"
-  }
-}

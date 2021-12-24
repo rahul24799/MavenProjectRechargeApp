@@ -37,7 +37,7 @@ public class UserDao {
 		pstmt.setInt(6, opId);
 
 		flag = pstmt.executeUpdate() > 0;
-		System.out.println("value insterted successfully");
+//		System.out.println("value insterted successfully");
 		return flag;
 
 	}
@@ -91,7 +91,7 @@ public class UserDao {
 	public static User findUser(String emailId) {
 		String Query = "select * from userlogin where Email_id='" + emailId + "'";
 		ConnectionClass conclass = new ConnectionClass();
-		Connection con = conclass.getConnection();
+		Connection con =conclass.getConnection();
 		Statement stmt = null;
 		User user = null;
 		OperatorDao operatordao = new OperatorDao();
@@ -109,6 +109,64 @@ public class UserDao {
 		}
 
 		return user;
+
+	}
+	
+	public int updateuserWallet(User user) {
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		String Query="update userlogin set wallet=? where Email_id=?";
+		String getWalletquery="select wallet from userlogin where Email_id=?";
+		PreparedStatement pstmt=null;
+		int i=0;
+		try {
+		  pstmt = con.prepareStatement(getWalletquery);
+			pstmt.setString(1,user.getEmailid());
+	       ResultSet rs=pstmt.executeQuery();
+	       double wallet=0;
+	       if(rs.next()) {
+	    	   wallet=rs.getDouble(1);
+	       }
+	       pstmt = con.prepareStatement(Query);
+	       pstmt.setDouble(1,wallet+user.getWallet());
+	       pstmt.setString(2,user.getEmailid());
+	        i=pstmt.executeUpdate();
+	       System.out.println(i+"updated");
+	       
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return i;
+		
+	}
+	
+	public int rechargeWalletupdate(double planPrice, User user) {
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		String Query = "update userlogin set wallet=? where Email_id=?";
+		String getWalletquery = "select wallet from userlogin where Email_id=?";
+		PreparedStatement pstmt = null;
+		int a = 0;
+		try {
+			pstmt = con.prepareStatement(getWalletquery);
+			pstmt.setString(1, user.getEmailid());
+			ResultSet rs = pstmt.executeQuery();
+			double wallet = 0;
+			if (rs.next()) {
+				wallet = rs.getDouble(1);
+			}
+			pstmt = con.prepareStatement(Query);
+			pstmt.setDouble(1, wallet-planPrice);
+			pstmt.setString(2, user.getEmailid());
+			a = pstmt.executeUpdate();
+			System.out.println(a + "wallet updated");
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return a;
 
 	}
 }

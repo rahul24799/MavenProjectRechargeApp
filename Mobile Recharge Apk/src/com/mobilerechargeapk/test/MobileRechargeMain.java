@@ -27,7 +27,7 @@ public class MobileRechargeMain {
 
 	public static void main(String[] args) throws SQLException {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Welcome to recharge app");
+		System.out.println("Welcome to Mobile recharge app");
 		System.out.println("\n1.Admin_login \n2.User_Login");
 		int val = Integer.parseInt(scan.nextLine());
 		switch (val) {
@@ -382,15 +382,19 @@ public class MobileRechargeMain {
 //				Double Price = Double.parseDouble(scan.nextLine());
 //				bdao=new BsnlDao();
 //				int bsnlplanId = bdao.findbsnlId(planname, Price);
-
+do {
 					bdao = new BsnlDao();
 					System.out.println("List of Bsnl_plans");
 					List<BsnlUser> bsnl1 = bdao.showBsnlplan();
 					for (int i = 0; i < bsnl1.size(); i++) {
 						System.out.println(bsnl1.get(i));
 					}
+					System.out.println("Do you want Show plan continue y/n");
+					stop = scan.nextLine().charAt(0);
+				} while (stop == 'Y' || stop == 'y');
 
 				case 2:
+					do {
 					System.out.println("Add the Bsnl_plan");
 					planName = scan.nextLine();
 					System.out.println("Add the Bsnl plan_Amount");
@@ -410,9 +414,12 @@ public class MobileRechargeMain {
 					} else {
 						System.out.println("error");
 					}
+					System.out.println("Do you want insert plan continue y/n");
+					stop = scan.nextLine().charAt(0);
+				} while (stop == 'Y' || stop == 'y');
 //					break;
 				case 3:
-
+                 do {
 					System.out.println("Updated Bsnl plan_name");
 					planName = scan.nextLine();
 					System.out.println("updated Bsnl plan Amount");
@@ -430,9 +437,13 @@ public class MobileRechargeMain {
 					} else {
 						System.out.println("not updated");
 					}
+					System.out.println("Do you want Updated plan continue y/n");
+					stop = scan.nextLine().charAt(0);
+				} while (stop == 'Y' || stop == 'y');
 
 //					break;
 				case 4:
+					
 					System.out.println("Delete the Bsnl_plan");
 					int bsnlId = Integer.parseInt(scan.nextLine());
 					vdao = new VodafoneDao();
@@ -443,13 +454,15 @@ public class MobileRechargeMain {
 						System.out.println("Not deleted");
 					}
 					break;
+					
 				}
 
 			}
 		case 2:
 
-			System.out.println("\n1.Register\n2.login \n Enter your choice");
+			System.out.println("\n1.Register\n2.login  \n Enter your choice");
 			int choice = Integer.parseInt(scan.nextLine());
+
 			boolean m = false;
 			UserDao userdao = null;
 			User currentUser = null;
@@ -526,7 +539,7 @@ public class MobileRechargeMain {
 				userdao = new UserDao();
 				m = userdao.insertUser(user);
 				if (m == true) {
-					System.out.println("inserted successfully");
+					System.out.println("Inserted successfully");
 				} else {
 					System.out.println("error");
 				}
@@ -566,82 +579,103 @@ public class MobileRechargeMain {
 					System.out.println("invalid entry");
 				}
 			case 3:
-				System.out.println("Select your NetWork \n1.Jio \n2.Airtel \n3.Vodafone \n4.BSNL");
-				int planchoice = Integer.parseInt(scan.nextLine());
-				switch (planchoice) {
-
+				System.out.println("Enter your choice \n1.SELECT_PLAN \n2.RECHARGE \n3.WALLET");
+				int selectchoice = Integer.parseInt(scan.nextLine());
+				switch (selectchoice) {
 				case 1:
-					JioDao jiodao = new JioDao();
-					System.out.println("List of jio_Plans");
-					List<JioUser> jio = jiodao.showJioplan();
-					for (int i = 0; i < jio.size(); i++) {
-						System.out.println(jio.get(i));
+					System.out.println("Select your NetWork \n1.Jio \n2.Airtel \n3.Vodafone \n4.BSNL ");
+					int planchoice = Integer.parseInt(scan.nextLine());
+					switch (planchoice) {
+
+					case 1:
+						JioDao jiodao = new JioDao();
+						System.out.println("List of jio_Plans");
+						List<JioUser> jio = jiodao.showJioplan();
+						for (int i = 0; i < jio.size(); i++) {
+							System.out.println(jio.get(i));
+						}
+						break;
+					case 2:
+						AirtelDao airteldao = new AirtelDao();
+						System.out.println("List of airtel_Plans");
+						List<AirtelUser> airtel = airteldao.showAirtelplan();
+						for (int i = 0; i < airtel.size(); i++) {
+							System.out.println(airtel.get(i));
+						}
+						break;
+					case 3:
+
+						VodafoneDao vdao = new VodafoneDao();
+						System.out.println("List of Vodafone_Plans");
+						List<VodafoneUser> vodafone1 = vdao.showViplan();
+						for (int i = 0; i < vodafone1.size(); i++) {
+							System.out.println(vodafone1.get(i));
+						}
+						break;
+					case 4:
+						BsnlDao bdao = new BsnlDao();
+						System.out.println("List of Bsnl_plans");
+						List<BsnlUser> bsnl1 = bdao.showBsnlplan();
+						for (int i = 0; i < bsnl1.size(); i++) {
+							System.out.println(bsnl1.get(i));
+						}
+						break;
+
 					}
-					break;
 				case 2:
-					AirtelDao airteldao = new AirtelDao();
-					System.out.println("List of airtel_Plans");
-					List<AirtelUser> airtel = airteldao.showAirtelplan();
-					for (int i = 0; i < airtel.size(); i++) {
-						System.out.println(airtel.get(i));
+					boolean h = false;
+					System.out.println("------RECHARGE-------");
+					System.out.println("Enter your Operator");
+					operatorName = scan.nextLine();
+					System.out.println("Enter the plan_name");
+					String planName = scan.nextLine();
+					System.out.println("Enter the amount");
+					double amount = Double.parseDouble(scan.nextLine());
+					System.out.println("Enter mobile Number");
+					Long mobileNum = Long.parseLong(scan.nextLine());
+
+					JioDao jioDao = new JioDao();
+					int planId = 0;
+					int userId = userdao.findUserId(currentUser);
+					int operatorId = currentUser.getOperator().getOperatorId();
+					// System.out.println(currentUser.getOperator().getOperatorname());
+					if (operatorName.equals("jio")) {
+						planId = JioDao.findjioId(planName, amount);
+						// System.out.println(planId);
+					} else if (operatorName.equals("Airtel")) {
+						planId = AirtelDao.findairtelId(planName, amount);
+					} else if (operatorName.equals("Vodafone")) {
+						planId = VodafoneDao.findvodafoneId(planName, amount);
+					} else {
+						planId = BsnlDao.findbsnlId(planName, amount);
 					}
-					break;
+					Date rechargeDate = new Date();
+					HistoryDetails historyDetails = new HistoryDetails(userId, operatorId, mobileNum, planId,
+							rechargeDate, amount);
+					HistorydetailsDao historyDao = new HistorydetailsDao();
+					h = historyDao.insertDetails(historyDetails);
+					if (h == true) {
+//						System.out.println("Recharge has been successfully");
+//						System.out.println("Recharge history details");
+						System.out.println(historyDetails);
+						
+						userdao.rechargeWalletupdate(amount, currentUser);
+						 System.out.println("Recharges has been Successfully");
+					} else {
+						System.out.println("invalid");
+					}
+
 				case 3:
-
-					VodafoneDao vdao = new VodafoneDao();
-					System.out.println("List of Vodafone_Plans");
-					List<VodafoneUser> vodafone1 = vdao.showViplan();
-					for (int i = 0; i < vodafone1.size(); i++) {
-						System.out.println(vodafone1.get(i));
-					}
-					break;
-				case 4:
-					BsnlDao bdao = new BsnlDao();
-					System.out.println("List of Bsnl_plans");
-					List<BsnlUser> bsnl1 = bdao.showBsnlplan();
-					for (int i = 0; i < bsnl1.size(); i++) {
-						System.out.println(bsnl1.get(i));
-					}
-					break;
-
+					System.out.println("Recharge here wallet");
+					System.out.println("Enter amount");
+					amount = Double.parseDouble(scan.nextLine());
+					System.out.println("Enter card number");
+					long cardNo = Long.parseLong(scan.nextLine());
+					System.out.println("Enter cvv");
+					int cvv = Integer.parseInt(scan.nextLine());
+					currentUser.setWallet(amount);
+					userdao.updateuserWallet(currentUser);
 				}
-			case 4:
-				boolean h = false;
-//				System.out.println("Enter your Recharge Details");
-				System.out.println("Enter your Operator");
-				operatorName = scan.nextLine();
-				System.out.println("Enter the plan_name");
-				String planName = scan.nextLine();
-				System.out.println("Enter the amount");
-				Double amount = Double.parseDouble(scan.nextLine());
-				System.out.println("Enter mobile Number");
-				Long mobileNum = Long.parseLong(scan.nextLine());
-				JioDao jioDao = new JioDao();
-				int planId = 0;
-				int userId = userdao.findUserId(currentUser);
-				int operatorId = currentUser.getOperator().getOperatorId();
-				// System.out.println(currentUser.getOperator().getOperatorname());
-				if (operatorName.equals("jio")) {
-					planId = JioDao.findjioId(planName, amount);
-					// System.out.println(planId);
-				} else if (operatorName.equals("Airtel")) {
-					planId = AirtelDao.findairtelId(planName, amount);
-				} else if (operatorName.equals("Vodafone")) {
-					planId = VodafoneDao.findvodafoneId(planName, amount);
-				} else {
-					planId = BsnlDao.findbsnlId(planName, amount);
-				}
-				Date rechargeDate = new Date();
-				HistoryDetails historyDetails = new HistoryDetails(userId, operatorId, mobileNum, planId, rechargeDate);
-				HistorydetailsDao historyDao = new HistorydetailsDao();
-				h = historyDao.insertDetails(historyDetails);
-				if (h == true) {
-					System.out.println("Recharge history details");
-					System.out.println(historyDetails);
-				} else {
-					System.out.println("invalid");
-				}
-
 			}
 
 		}
