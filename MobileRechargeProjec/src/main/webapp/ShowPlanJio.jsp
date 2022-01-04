@@ -37,6 +37,7 @@ for(int i=0;i<ShowPlan.size();i++)
 	JioUser jioUser=ShowPlan.get(i);
 	int findjioId=jioDao.findjioId(jioUser.getPlanName(),jioUser.getPrice());
 %>
+
 <tr>
 <td><%= findjioId %></td>
 <td><%= jioUser.getPlanName() %></td>
@@ -44,6 +45,8 @@ for(int i=0;i<ShowPlan.size();i++)
 <td><%= jioUser.getValidity() %></td>
 <td><%= jioUser.getBenfits() %></td>
 <td><%= jioUser.getOperator().getOperatorname() %></td>
+
+
 </tr>
 <%}%>
 </table>

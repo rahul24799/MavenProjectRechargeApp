@@ -3,7 +3,7 @@ package com.mobilerechargeapp.model;
 import java.util.Objects;
 
 public class JioUser {
-	private int jioId;
+//	private int jioId;
 	private String planName;
 	private double price;
 	private  String validity;
@@ -13,14 +13,14 @@ public class JioUser {
 	
 	
 	
-	
-	
-	public int getJioId() {
-		return jioId;
-	}
-	public void setJioId(int jioId) {
-		this.jioId = jioId;
-	}
+//	
+//	
+//	public int getJioId() {
+//		return jioId;
+//	}
+//	public void setJioId(int jioId) {
+//		this.jioId = jioId;
+//	}
 	public String getPlanName() {
 		return planName;
 	}
@@ -55,15 +55,15 @@ public class JioUser {
 		super();
 		
 	}
-	public JioUser(int jioId,String planName, double price, String validity, String benfits, Operator operator) {
-		super();
-		this.jioId=jioId;
-		this.planName = planName;
-		this.price = price;
-		this.validity = validity;
-		this.benfits = benfits;
-		this.operator = operator;
-	}
+//	public JioUser(int jioId,String planName, double price, String validity, String benfits, Operator operator) {
+//		super();
+//		this.jioId=jioId;
+//		this.planName = planName;
+//		this.price = price;
+//		this.validity = validity;
+//		this.benfits = benfits;
+//		this.operator = operator;
+//	}
 	
 	
 	

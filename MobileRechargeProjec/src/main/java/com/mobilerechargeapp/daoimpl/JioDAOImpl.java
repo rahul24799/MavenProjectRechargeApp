@@ -105,7 +105,7 @@ public class JioDAOImpl implements JioDao {
 				Operator operator = operatordao.findOperator1(rs.getInt(6));
 
 //			System.out.println(operator);
-				jio = new JioUser(rs.getInt(1),rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
+				jio = new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
 				jioList.add(jio);
 			}
 		} catch (SQLException e) {
@@ -160,6 +160,32 @@ public class JioDAOImpl implements JioDao {
 	}
 	
 	
+	public List<JioUser> showJioplan1() {
+		JioUser jio = null;
+		List<JioUser> jioList = new ArrayList<JioUser>();
+		String showQuery = "select * from jio_plans order by price asc ";
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(showQuery);
+			OperatorDAOImpl operatordao = new OperatorDAOImpl();
+
+			while (rs.next()) {
+
+				Operator operator = operatordao.findOperator1(rs.getInt(6));
+
+//			System.out.println(operator);
+				jio = new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
+				jioList.add(jio);
+			}
+		} catch (SQLException e) {
+			System.out.println("invalid");
+			e.printStackTrace();
+		}
+		return jioList;
+	}
+
 	
 	
 

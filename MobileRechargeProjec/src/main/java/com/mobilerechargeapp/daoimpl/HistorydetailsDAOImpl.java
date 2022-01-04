@@ -66,11 +66,11 @@ public class HistorydetailsDAOImpl implements HistorydetailsDao {
 //		Date today=new Date();
    		
    	}
-   	
-//   	public String findValidity(HistoryDetails historyDetails) {
-//   		String Query="Select * from history_details where "
-//		return null;
-//   		
-//   	}
+  public int  findUsername() {
+	  String Query="select user_name from userlogin where user_id=?";
+	return 0;
+	  
+  }
+
      }
 

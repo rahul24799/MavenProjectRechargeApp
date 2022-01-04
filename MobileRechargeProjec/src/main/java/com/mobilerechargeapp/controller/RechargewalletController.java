@@ -39,14 +39,14 @@ public class RechargewalletController extends HttpServlet {
 //		int cvv = Integer.parseInt(request.getParameter("cvv"));
 		String EmailId=request.getParameter("emailid");
 		Double amount = Double.parseDouble(request.getParameter("amount"));
-//		Connection con=ConnectionClass.getConnection();
+
 		UserDAOImpl userDao=new UserDAOImpl();
 		HttpSession session=request.getSession();
         User user=(User)session.getAttribute("CurrentUser");
         user.setWallet(amount);
 		int i=userDao.updateuserWallet(user);
 		if(user!=null) {
-			response.sendRedirect("vodafone.jsp");
+			response.sendRedirect("planjiouser.jsp");
 		}
 		else {
 			response.sendRedirect("wallet.jsp");

@@ -22,8 +22,6 @@ select*from userlogin;
 drop table userlogin CASCADE CONSTRAINTS;
 desc userlogin;
 truncate table userlogin;
-
-
 ------------------------------------------------------------------------------------------------------------------------
 --operator table--erator
 create table operator_details(operator_id int   PRIMARY KEY ,operator_name varchar2(100) not null);
@@ -44,6 +42,7 @@ validity varchar(100) not null,benefits varchar(100) not null,operator_id int no
 desc jio_plans;
 drop table jio_plans;
 truncate table jio_plans;
+insert into jio_plans (plan_name,price,validity,benefits)values('sportspack',199,'28days','unlimitedcalls');
 ------------------------------------------------------------------------------------------------------------------------------
 --airtel_user
 create table Airtel_plans(airtelplan_id int GENERATED ALWAYS AS IDENTITY START WITH 5000 INCREMENT by 1 PRIMARY KEY  ,plan_name varchar2(100) not null,price varchar(100) not null,
@@ -107,12 +106,15 @@ desc Admin;
 select*from  userlogin;
 select * from operator_details;
 select * from jio_plans;
+
 select * from Airtel_plans;
 select * from vodafone_plans;
 select * from BSNL_plans;
 select * from history_details;
 commit;
-
+select * from userlogin where user_id=28;
+delete from jio_plans where jioplan_id=1105;
+delete from airtel_plans where validity='30 days';
 rollback;
  delete from history_details where plan_id=0;
  

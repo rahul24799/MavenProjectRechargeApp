@@ -8,9 +8,12 @@
 </head>
 <body>
 <h1>Select Your NetWork</h1>
-<a href="planjiouser.jsp"><h1>Jio</h1></a><br><br>
-<a href="planairteluser.jsp"><h1>Airtel</h1></a><br><br>
-<a href="Vodafone"><h1>vodafone</h1></a><br><br>
-<a href="Bsnl"><h1>Bsnl</h1></a><br><br>
+
+
+<a href="planjiouser.jsp"><h1>Jio</h1></a><br>
+<a href="planairteluser.jsp"><h1>Airtel</h1></a><br>
+<a href="planvodafoneUser.jsp"><h1>vodafone</h1></a><br>
+<a href="planbsnluser.jsp"><h1>Bsnl</h1></a><br>
+<a href="wallet.jsp"><h1>wallet</h1></a>
 </body>
 </html>

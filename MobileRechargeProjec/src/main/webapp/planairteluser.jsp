@@ -16,7 +16,7 @@ border:1px solid black;
 border-collapse:collapse;
 
 }</style>
-
+<body>
  <form align="center">
   <table >
     <tr>
@@ -26,6 +26,7 @@ border-collapse:collapse;
     <td><strong>validity</strong></td>
     <td><strong>Benefit</strong></td>
   	<td><strong>Operator</strong></td>
+  
   	
   	</tr>
 <%
@@ -35,7 +36,7 @@ AirtelDAOImpl airtelDao=new AirtelDAOImpl();;
 for(int i=0;i<ShowPlan.size();i++)
 {
 	AirtelUser airtelUser=ShowPlan.get(i);
-	
+	String planName=airtelUser.getPlanName();
 %>
 <tr>
 <td><%= airtelUser.getPlanName() %></td>
@@ -43,6 +44,9 @@ for(int i=0;i<ShowPlan.size();i++)
 <td><%= airtelUser.getValidity() %></td>
 <td><%= airtelUser.getBenfits() %></td>
 <td><%= airtelUser.getOperator().getOperatorname() %></td>
+<td><a href="recharge.jsp?planName=<%=airtelUser.getPlanName() %>&price=<%= airtelUser.getPrice() %>
+&operator=<%= airtelUser.getOperator().getOperatorname() %>" >Recharge</a></td>
+
 
 </tr>
 <%}%>

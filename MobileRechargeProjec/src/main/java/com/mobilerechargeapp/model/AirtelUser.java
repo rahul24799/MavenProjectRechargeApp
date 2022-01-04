@@ -3,7 +3,7 @@ package com.mobilerechargeapp.model;
 import java.util.Objects;
 
 public class AirtelUser {
-	
+	private int airtelId;
 	private String planName;
 	private double price;
 	private  String validity;
@@ -13,6 +13,12 @@ public class AirtelUser {
 	
 	
 
+	public int getAirtelId() {
+		return airtelId;
+	}
+	public void setAirtelId(int airtelId) {
+		this.airtelId = airtelId;
+	}
 	public String getPlanName() {
 		return planName;
 	}
@@ -51,6 +57,15 @@ public class AirtelUser {
 	
 	
 	
+public AirtelUser(int airtelId, String planName, double price, String validity, String benfits, Operator operator) {
+		super();
+		this.airtelId = airtelId;
+		this.planName = planName;
+		this.price = price;
+		this.validity = validity;
+		this.benfits = benfits;
+		this.operator = operator;
+	}
 //	public AirtelUser(int airtelId,String planName, double price, String validity, String benfits, Operator operator ) {
 //		super();
 //		this.airtelplanId = airtelId;

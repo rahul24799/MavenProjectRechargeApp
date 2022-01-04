@@ -31,9 +31,9 @@ public class OperatorDAOImpl implements OperatorDao {
 
 	}
 
-	public int findOperatorId() {
+	public int findOperatorId(String name) {
 		Connection con = ConnectionClass.getConnection();
-		String query = "select operator_id from operator_details where operator_name";
+		String query = "select operator_id from operator_details where operator_name='"+name+"'";
 		int oId = 0;
 		try {
 			Statement stmt = con.createStatement();

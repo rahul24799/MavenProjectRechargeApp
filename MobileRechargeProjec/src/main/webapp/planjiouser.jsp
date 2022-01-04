@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>ShowplanJio</title>
 </head>
 <style type="text/css">
 table,tr,td{
@@ -26,9 +26,8 @@ border-collapse:collapse;
     <td><strong>validity</strong></td>
     <td><strong>Benefit</strong></td>
   	<td><strong>Operator</strong></td>
-  	<td>Recharge here</td>
   	
-  
+  	
   	</tr>
 <%
 JioDAOImpl jioDao=new JioDAOImpl();
@@ -37,16 +36,20 @@ JioDAOImpl jioDao=new JioDAOImpl();
 for(int i=0;i<ShowPlan.size();i++)
 {
 	JioUser jioUser=ShowPlan.get(i);
+	String planName=jioUser.getPlanName();
 	
 %>
+
 <tr>
 <td><%= jioUser.getPlanName() %></td>
 <td><%= jioUser.getPrice() %></td>
 <td><%= jioUser.getValidity() %></td>
 <td><%= jioUser.getBenfits() %></td>
 <td><%= jioUser.getOperator().getOperatorname() %></td>
-<td><a href="recharge.jsp">Recharge</a></td>
+<td><a href="recharge.jsp?planName=<%=jioUser.getPlanName() %>&price=<%= jioUser.getPrice() %>
+&operator=<%= jioUser.getOperator().getOperatorname() %>" >Recharge</a></td>
 </tr>
+
 <%}%>
 </table>
 

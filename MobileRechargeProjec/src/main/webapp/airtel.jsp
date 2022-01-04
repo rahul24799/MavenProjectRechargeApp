@@ -37,8 +37,7 @@ for(int i=0;i<ShowPlan.size();i++)
    int findAirtelId=airtelDao.findairtelId(airtelUser.getPlanName(),airtelUser.getPrice());
 	%>
 	
-	<%int airtelplanId=Integer.parseInt(request.getParameter("airtelDel"));
-airtelDao.deleteAirtel(airtelplanId); %>
+
 	<tr>
 <td><%= findAirtelId %>	
 <td><%= airtelUser.getPlanName() %></td>
@@ -46,14 +45,14 @@ airtelDao.deleteAirtel(airtelplanId); %>
 <td><%= airtelUser.getValidity() %></td>
 <td><%= airtelUser.getBenfits() %></td>
 <td><%= airtelUser.getOperator().getOperatorname() %></td>
-<td><a href="airtel.jsp?airtelDel=<%=airtelUser.getAirtelId()%>">Delete</a> </td>
+
 </tr>
 <%}%>
 </table>
  </form>
  <form>
-<a href="addairtel.jsp">Insert</a>
-<a href="updateairtel.jsp">Update</a>
+<a href="addairtel.jsp"><h2>Insert</h2></a>
+<a href="updateairtel.jsp"><h2>Update</h2></a>
 
 </form>
 </body>

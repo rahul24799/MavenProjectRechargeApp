@@ -105,7 +105,7 @@ public class AirtelDAOImpl implements AirtelDao {
 			OperatorDAOImpl operatordao=new OperatorDAOImpl();
 			while(rs.next()) {
 				Operator operator=operatordao.findOperator1(rs.getInt(6));
-				 airtel=new AirtelUser(rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5),operator);
+				 airtel=new AirtelUser(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5),operator);
 				 AirtelList.add(airtel);
 			}
 		} catch (SQLException e) {

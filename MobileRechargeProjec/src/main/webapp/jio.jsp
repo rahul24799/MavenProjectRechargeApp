@@ -38,26 +38,28 @@ border-collapse:collapse;
 <%
 JioDAOImpl jioDao=new JioDAOImpl();
  List<JioUser>ShowPlan=jioDao.showJioplan();
- 
-for(int i=0;i<ShowPlan.size();i++)
-{%>
-	<tr>
-	<td>
-	<%= ShowPlan.get(i).getJioId() %></td>
-	<td><%=ShowPlan.get(i).getPlanName() %></td>
-	<td><%=ShowPlan.get(i).getPrice() %></td>
-	<td><%=ShowPlan.get(i).getValidity() %></td>
-	<td><%=ShowPlan.get(i).getBenfits() %></td>
-	<td><%=ShowPlan.get(i).getOperator().getOperatorname() %></td>
-	<td><a href="jio.jsp?jioId=<%=ShowPlan.get(i).getJioId() %>">Delete</a></td>
-	
-	
+ for(int i=0;i<ShowPlan.size();i++)
+ {
+   JioUser jioUser=ShowPlan.get(i);
+    int findjioId=jioDao.findjioId(jioUser.getPlanName(),jioUser.getPrice());
+ 	%>
+ 	
+<%int jioplanId=Integer.parseInt(request.getParameter("airtelDel"));
+
+  %>
+
+<tr>
+<td><%= findjioId %></td>
+<td><%= jioUser.getPlanName() %></td>
+<td><%= jioUser.getPrice() %></td>
+<td><%= jioUser.getValidity() %></td>
+<td><%= jioUser.getBenfits() %></td>
+<td><%= jioUser.getOperator().getOperatorname() %></td>
+<td><%=  %>
+
 </tr>
 <%}%>
 </table>
-<%int JioId=Integer.parseInt(request.getParameter("jioId"));
-jioDao.deleteJio(JioId);
-%>
   </form>
  
 <a href="addjio.jsp">Insert</a><br><br>
