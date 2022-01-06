@@ -8,5 +8,5 @@ public interface UserDao {
 	public int findUserId(User user);
 	public  User findUser(String emailId);
 	public int updateuserWallet(User user);
-    public int rechargeWalletupdate(double planPrice, User user);
+    public boolean rechargeWalletupdate(double planPrice, User user);
 }

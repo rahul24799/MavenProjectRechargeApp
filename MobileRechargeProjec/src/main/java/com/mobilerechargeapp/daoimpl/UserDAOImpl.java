@@ -123,19 +123,19 @@ public class UserDAOImpl implements UserDao {
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
 		String Query = "update userlogin set wallet=? where Email_id=?";
-		String getWalletquery = "select wallet from userlogin where Email_id=?";
+		//String getWalletquery = "select wallet from userlogin where Email_id=?";
 		PreparedStatement pstmt = null;
 		int i = 0;
 		try {
-			pstmt = con.prepareStatement(getWalletquery);
-			pstmt.setString(1, user.getEmailid());
-			ResultSet rs = pstmt.executeQuery();
-			double wallet = 0;
-			if (rs.next()) {
-				wallet = rs.getDouble(1);
-			}
+			//pstmt = con.prepareStatement(getWalletquery);
+			//pstmt.setString(1, user.getEmailid());
+			//ResultSet rs = pstmt.executeQuery();
+			//double wallet = 0;
+			//if (rs.next()) {
+			//	wallet = rs.getDouble(1);
+			//}
 			pstmt = con.prepareStatement(Query);
-			pstmt.setDouble(1, wallet + user.getWallet());
+			pstmt.setDouble(1, user.getWallet());
 			pstmt.setString(2, user.getEmailid());
 			i = pstmt.executeUpdate();
 			System.out.println(i + "updated");
@@ -148,13 +148,13 @@ public class UserDAOImpl implements UserDao {
 
 	}
 
-	public int rechargeWalletupdate(double planPrice, User user) {
+	public boolean rechargeWalletupdate(double planPrice, User user) {
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
 		String Query = "update userlogin set wallet=? where Email_id=?";
 		String getWalletquery = "select wallet from userlogin where Email_id=?";
 		PreparedStatement pstmt = null;
-		int a = 0;
+		boolean flag=false;
 		try {
 			pstmt = con.prepareStatement(getWalletquery);
 			pstmt.setString(1, user.getEmailid());
@@ -166,14 +166,57 @@ public class UserDAOImpl implements UserDao {
 			pstmt = con.prepareStatement(Query);
 			pstmt.setDouble(1, wallet - planPrice);
 			pstmt.setString(2, user.getEmailid());
-			a = pstmt.executeUpdate();
-			System.out.println(a + "wallet updated");
+			flag = pstmt.executeUpdate()>0;
+			//System.out.println(a + "wallet updated");
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return a;
+		return flag;
 
 	}
+	public User findUser(int userId) {
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		String Query="select * from userlogin where user_id='"+userId+"'";
+		Statement stmt=null;
+		User user=null;
+		OperatorDAOImpl operatordao = new OperatorDAOImpl();
+	
+		try {
+		ResultSet rs = stmt.executeQuery(Query);
+			 stmt =con.createStatement();
+			 
+				if(rs.next()) {
+				Operator operator = operatordao.findOperator1(rs.getInt(7));
+				 user = new User(rs.getString(2), rs.getString(3), rs.getLong(4), rs.getString(5), rs.getDouble(6),
+							operator);
+				}
+		}
+	 catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		return user;
+		
+	}
+	public ResultSet history(User user) {
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		String joinQuery = "select u.user_name,o.operator_name,h.plan_id,h.Recharge_date,h.Payment from userlogin u join operator_details o on u.operator_id=o.operator_id join  history_details h on h.user_id=u.user_id where user_id="+user.getUserId();
+		ResultSet rs = null;
+		try {
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(joinQuery);
+			System.out.println(rs);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
+
 }

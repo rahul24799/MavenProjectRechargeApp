@@ -47,6 +47,8 @@ for(int i=0;i<ShowPlan.size();i++)
 <td><%= jioUser.getOperator().getOperatorname() %></td>
 
 
+
+
 </tr>
 <%}%>
 </table>

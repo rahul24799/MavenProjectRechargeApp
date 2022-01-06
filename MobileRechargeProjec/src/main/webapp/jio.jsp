@@ -23,7 +23,7 @@ border-collapse:collapse;
 </head>
 <body>
   <h1>ShowPlan</h1>
-  <form align="center">
+  
   <table >
     <tr>
     <td><strong>plan-Id</strong></td>
@@ -44,9 +44,9 @@ JioDAOImpl jioDao=new JioDAOImpl();
     int findjioId=jioDao.findjioId(jioUser.getPlanName(),jioUser.getPrice());
  	%>
  	
-<%int jioplanId=Integer.parseInt(request.getParameter("airtelDel"));
 
-  %>
+
+  
 
 <tr>
 <td><%= findjioId %></td>
@@ -55,16 +55,14 @@ JioDAOImpl jioDao=new JioDAOImpl();
 <td><%= jioUser.getValidity() %></td>
 <td><%= jioUser.getBenfits() %></td>
 <td><%= jioUser.getOperator().getOperatorname() %></td>
-<td><%=  %>
+<td><a href="deleteplan?jioId=<%= findjioId %>">delete</a></td>
 
 </tr>
 <%}%>
 </table>
-  </form>
+  
  
-<a href="addjio.jsp">Insert</a><br><br>
-<a href="updateJio.jsp">UPDATE</a><br><br>
-<a href="deleteJio.jsp">DELETE</a><br><br>
+
 
 
 </body>

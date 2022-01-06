@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mobilerechargeapp.daoimpl.JioDAOImpl;
 import com.mobilerechargeapp.daoimpl.VodafoneDAOImpl;
 
 /**
@@ -29,13 +30,14 @@ public class DeletevodafoneController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int vodafoneplanId=Integer.parseInt(request.getParameter("ViplanId"));
-		VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
-		boolean b=vodafoneDao.deleteVodafone(vodafoneplanId);
-		if(b==true) {
-			response.sendRedirect("vodafone.jsp");
-		}
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int vodafoneId=Integer.parseInt(request.getParameter("vodfoneId"));
+	     VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
+        boolean b=vodafoneDao.deleteVodafone(vodafoneId);
+        if(b) {
+        	response.sendRedirect("vodafone.jsp");
+        	System.out.println("deleted successfully");
+        }
 	}
 
 	/**

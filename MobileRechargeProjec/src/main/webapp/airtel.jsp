@@ -18,7 +18,7 @@ border-collapse:collapse;
 </head>
 <body style="text-align: center;">
  <h1>AIRTEL PLAN</h1>
-  <form>
+
   <table >
     <tr>
     <td><strong>plan-Id</strong></td>
@@ -45,11 +45,11 @@ for(int i=0;i<ShowPlan.size();i++)
 <td><%= airtelUser.getValidity() %></td>
 <td><%= airtelUser.getBenfits() %></td>
 <td><%= airtelUser.getOperator().getOperatorname() %></td>
-
+<td><a href="DeleteairtelController?airtelId=<%= findAirtelId %>">delete</a></td>
 </tr>
 <%}%>
 </table>
- </form>
+
  <form>
 <a href="addairtel.jsp"><h2>Insert</h2></a>
 <a href="updateairtel.jsp"><h2>Update</h2></a>

@@ -34,11 +34,12 @@ public class DeletebsnlController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int bsnlplanId=Integer.parseInt(request.getParameter("bsnlId"));
+		int bsnlId=Integer.parseInt(request.getParameter("bsnlId"));
 		BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
-		boolean b=bsnlDao.deleteBsnl(bsnlplanId);
-		if(b==true) {
+		boolean b=bsnlDao.deleteBsnl(bsnlId);
+		if(b) {
 			response.sendRedirect("bsnl.jsp");
+			System.out.println("Succesfully deleted");
 	}
 	}
 	/**

@@ -10,7 +10,7 @@ public class HistoryDetails {
 	private long mobileNumber;
 	private int planId;
 	private Date rechargeDate;
-	private Double wallet;
+	private double payment;
 	
 	
 	
@@ -47,37 +47,35 @@ public class HistoryDetails {
 	}
 	
 	public Double getWallet() {
-		return wallet;
+		return payment;
 	}
 	public void setWallet(Double wallet) {
-		this.wallet = wallet;
+		this.payment = wallet;
 	}
 	
-	public HistoryDetails(int userId, int operatorId, long mobileNumber, int planId, Date rechargeDate, Double wallet) {
+	public HistoryDetails(int userId, int operatorId, long mobileNumber, int planId, Date rechargeDate, Double payment) {
 		super();
 		this.userId = userId;
 		this.operatorId = operatorId;
 		this.mobileNumber = mobileNumber;
 		this.planId = planId;
 		this.rechargeDate = rechargeDate;
-		this.wallet = wallet;
+		this.payment = payment;
 	}
 	public HistoryDetails() {
 		super();
 		
 	}
-	public HistoryDetails(int userId2, String operatorName, long mobileNumber2, int planId2, Date rechargeDate2,
-			double amount) {
-		// TODO Auto-generated constructor stub
-	}
+	
+	
 	@Override
 	public String toString() {
 		return "HistoryDetails [userId=" + userId + ", operatorId=" + operatorId + ", mobileNumber=" + mobileNumber
-				+ ", planId=" + planId + ", rechargeDate=" + rechargeDate + ", wallet=" + wallet + "]";
+				+ ", planId=" + planId + ", rechargeDate=" + rechargeDate + ", wallet=" + payment + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(mobileNumber, operatorId, planId, rechargeDate, userId, wallet);
+		return Objects.hash(mobileNumber, operatorId, planId, rechargeDate, userId, payment);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -90,7 +88,7 @@ public class HistoryDetails {
 		HistoryDetails other = (HistoryDetails) obj;
 		return mobileNumber == other.mobileNumber && operatorId == other.operatorId && planId == other.planId
 				&& Objects.equals(rechargeDate, other.rechargeDate) && userId == other.userId
-				&& Objects.equals(wallet, other.wallet);
+				&& Objects.equals(payment, other.payment);
 	}
 	
 	

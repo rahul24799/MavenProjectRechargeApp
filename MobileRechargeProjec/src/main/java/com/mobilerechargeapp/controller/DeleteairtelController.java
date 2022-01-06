@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mobilerechargeapp.daoimpl.AirtelDAOImpl;
+import com.mobilerechargeapp.daoimpl.JioDAOImpl;
 import com.mobilerechargeapp.util.ConnectionClass;
 
 /**
@@ -33,13 +34,14 @@ public class DeleteairtelController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int airtelplanId=Integer.parseInt(request.getParameter("planId"));
-		Connection con=ConnectionClass.getConnection();
+		int airtelId=Integer.parseInt(request.getParameter("airtelId"));
 		AirtelDAOImpl airtelDao=new AirtelDAOImpl();
-		boolean b=airtelDao.deleteAirtel(airtelplanId);
-		if(b==true) {
-			response.sendRedirect("airtel.jsp");
-		}
+        boolean b=airtelDao.deleteAirtel(airtelId);
+        if(b) {
+        	response.sendRedirect("airtel.jsp");
+        	System.out.println("deleted successfully");
+        }
+		
 	}
 
 	/**

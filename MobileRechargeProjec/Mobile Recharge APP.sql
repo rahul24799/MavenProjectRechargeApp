@@ -98,6 +98,10 @@ desc history_details;
 drop table history_details;
 truncate table  history_details;
 select * from history_details;
+select u.user_name,o.operator_name,h.plan_id,h.Recharge_date,h.Payment from userlogin u join operator_details o  on 
+u.operator_id=o.operator_id join  history_details h on h.user_id=u.user_id;
+
+insert into history_details (user_id,operator_id,mobile_number,plan_id,recharge_date,payment)values (30,101,9994136328,1107,'20-12-2021',290);
 --------------------------------------------------------------------------------------------------------------------
 --create table offer_details(offer_id int GENERATED ALWAYS AS IDENTITY START WITH 500 INCREMENT by 1 PRIMARY KEY,offer_description varchar2 (100), plan_id int,operator_id int,
 --foreign key (plan_id)references history_details(plan_id),foreign key (operator_id)references operator_details (operator_id));
@@ -111,6 +115,7 @@ select * from Airtel_plans;
 select * from vodafone_plans;
 select * from BSNL_plans;
 select * from history_details;
+truncate table history_details;
 commit;
 select * from userlogin where user_id=28;
 delete from jio_plans where jioplan_id=1105;

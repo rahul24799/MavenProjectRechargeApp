@@ -11,5 +11,5 @@ public interface JioDao {
 	public boolean deleteJio(int jioplanId);
 	public List<JioUser> showJioplan();
 	public  int findjioId(String planName, Double price);
-	public ResultSet  findJiovalidity(JioUser jioUser);
+	public int  findJiovalidity(JioUser jioUser);
 }

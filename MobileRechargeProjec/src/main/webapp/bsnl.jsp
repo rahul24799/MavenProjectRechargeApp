@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>bsnlShowPlan</title>
 <style type="text/css">
 table,tr,td{
 border:1px solid black;
@@ -44,12 +44,12 @@ for(int i=0;i<showBsnlplan.size();i++)
 <td><%= bsnlUser.getValidity() %></td>
 <td><%= bsnlUser.getBenfits() %></td>
 <td><%= bsnlUser.getOperator().getOperatorname() %></td>
+<td><a href="DeletebsnlController?bsnlId=<%=findbsnlId %>">delete</a></td>
 </tr>
 <%}%>
 </table>
   </form>
   <a href="addbsnl.jsp">Insert NetWork</a><br>
   <a href="updatebsnl.jsp">Update NetWork</a><br>
-  <a href="deletebsnl.jsp">Delete NetWork</a><br>
 </body>
 </html>

@@ -72,5 +72,24 @@ public class OperatorDAOImpl implements OperatorDao {
 		return operator;
 
 	}
+	public  Operator findOperator(int operatorId) {
+		Connection con = ConnectionClass.getConnection();
+		String Query="select * from operator_details where operator_id='" +operatorId+"'";
+		Operator operator=null;
+		try {
+			Statement stmt=con.createStatement();
+			ResultSet rs = stmt.executeQuery(Query);
+			if(rs.next()) {
+				 operator=new Operator(rs.getInt(1),rs.getString(2));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return operator;
+		
+	}
 
 }

@@ -16,7 +16,7 @@ import com.mobilerechargeapp.util.ConnectionClass;
 /**
  * Servlet implementation class DeleteJioController
  */
-@WebServlet("/DeleteJioController")
+@WebServlet("/deleteplan")
 public class DeleteJioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,16 +34,17 @@ public class DeleteJioController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int jioplanId=Integer.parseInt(request.getParameter("planId"));
 		
-		JioDAOImpl jioDao=new JioDAOImpl();
-		boolean b=jioDao.deleteJio(jioplanId);
-		if(b==true) {
-			response.sendRedirect("jio.jsp");
-		}
-		else {
-			response.sendRedirect("deletejio.jsp");
-		}
+	//	<td><a href="deleteplan?jioId=<%= findjioId %>">delete</a></td>
+		
+		int jioId=Integer.parseInt(request.getParameter("jioId"));
+		JioDAOImpl jiodao=new JioDAOImpl();
+        boolean b=jiodao.deleteJio(jioId);
+        if(b) {
+        	response.sendRedirect("jio.jsp");
+        	System.out.println("deleted successfully");
+        }
+		
 	}
 
 	/**

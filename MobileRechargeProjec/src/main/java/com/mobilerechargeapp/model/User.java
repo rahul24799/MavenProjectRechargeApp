@@ -3,6 +3,7 @@ package com.mobilerechargeapp.model;
 import java.util.Objects;
 
 public class User {
+	private int userId;
 	private String username;
 	private String emailid;
 	private long phonenumber;
@@ -10,6 +11,12 @@ public class User {
 	private Double wallet;
 	private Operator operator;
 	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -63,14 +70,21 @@ public class User {
 		this.operator = operator;
 	}
 	
-	public User(String username, String emailid, long phonenumber, String password) {
-		super();
-		this.username = username;
-		this.emailid = emailid;
-		this.phonenumber = phonenumber;
-		this.password = password;
-		
-	}
+//	public User(String username, String emailid, long phonenumber, String password) {
+//		super();
+//		this.username = username;
+//		this.emailid = emailid;
+//		this.phonenumber = phonenumber;
+//		this.password = password;
+//		
+//	}
+//	public User( String emailid) {
+//		super();
+//		
+//		this.emailid = emailid;
+//		
+//	}
+//	
 	
 	@Override
 	public String toString() {

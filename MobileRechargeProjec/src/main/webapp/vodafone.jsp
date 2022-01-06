@@ -19,7 +19,7 @@ border-collapse:collapse;
 </head>
 <body>
 <h1>showPlan</h1>
-  <form align="center">
+ 
   <table >
     <tr>
     <td><strong>plan-Id</strong></td>
@@ -46,13 +46,14 @@ for(int i=0;i<ShowViplan.size();i++)
 <td><%= vodafoneUser.getValidity() %></td>
 <td><%= vodafoneUser.getBenfits() %></td>
 <td><%= vodafoneUser.getOperator().getOperatorname() %></td>
+<td><a href="DeletevodafoneController?vodfoneId=<%= findvodafoneId %>">delete</a></td>
 </tr>
 <%}%>
 </table>
 
-</form>
+
 <a href="addVodafone.jsp">INSERT</a>
 <a href="UpdateVodafone.jsp">UPDATE</a>
-<a href="DeleteVodafone.jsp">DELETE</a>
+
 </body>
 </html>

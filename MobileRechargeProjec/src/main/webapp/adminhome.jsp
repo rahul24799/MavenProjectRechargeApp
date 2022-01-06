@@ -9,8 +9,24 @@
 <body>
 <h1> SELECT OPERATOR</h1>
 <form>
-<a href="jio.jsp?jioId=0">JIO</a><br><br>
-<a href="airtel.jsp?airtelDel=0">AIRTEL</a><br><br>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="jio.jsp">JIO</a></li>
+      <li><a href="airtel.jsp">AIRTEL</a></li>
+      <li><a href="vodafone.jsp">VODAFONE</a></li>
+       <li><a href="bsnl.jsp">BSNL</a></li>
+    </ul>
+  </div>
+</nav>
+<a href="jio.jsp">JIO</a><br><br>
+<a href="airtel.jsp">AIRTEL</a><br><br>
 <a href="vodafone.jsp">VODAFONE</a><br><br>
 <a href="bsnl.jsp">BSNL</a><br><br>
 </form>

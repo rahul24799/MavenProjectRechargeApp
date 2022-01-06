@@ -129,6 +129,7 @@ public class JioDAOImpl implements JioDao {
 			if (rs.next()) {
 				jioplanId = rs.getInt(1);
 				System.out.println(rs.getInt(1));
+				return jioplanId;
 			}
 		} catch (SQLException e) {
 			System.out.println("invalid_id");
@@ -139,10 +140,11 @@ public class JioDAOImpl implements JioDao {
 
 	}
 
-	public ResultSet findJiovalidity(JioUser jioUser) {
+	public int findJiovalidity(JioUser jioUser) {
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
 		JioDAOImpl jioDao = new JioDAOImpl();
+		int validity=0;
 		int JioUserId = jioDao.findjioId(jioUser.getPlanName(), jioUser.getPrice());
 		String Query = "select validity from jio_plans where jioplan_id=" + JioUserId;
 		ResultSet rs = null;
@@ -150,12 +152,16 @@ public class JioDAOImpl implements JioDao {
 
 			Statement stmt = con.createStatement();
 			rs = stmt.executeQuery(Query);
+			if(rs.next())
+			{
+				validity=rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return rs;
+		return validity;
 
 	}
 	
@@ -175,7 +181,7 @@ public class JioDAOImpl implements JioDao {
 
 				Operator operator = operatordao.findOperator1(rs.getInt(6));
 
-//			System.out.println(operator);
+
 				jio = new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
 				jioList.add(jio);
 			}
@@ -184,6 +190,33 @@ public class JioDAOImpl implements JioDao {
 			e.printStackTrace();
 		}
 		return jioList;
+	}
+	public JioUser findPlan(int id)
+	{
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		JioDAOImpl jioDao = new JioDAOImpl();
+		int validity=0;
+		//int JioUserId = jioDao.findjioId(jioUser.getPlanName(), jioUser.getPrice());
+		String Query = "select * from jio_plans where jioplan_id=" + id;
+		ResultSet rs = null;
+		JioUser plan=null;
+		try {
+
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(Query);
+			if(rs.next())
+			{
+				OperatorDAOImpl operDao=new OperatorDAOImpl();
+				Operator operator=operDao.findOperator(rs.getInt(6));
+				plan=new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5),operator );
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return plan;
+		
 	}
 
 	
