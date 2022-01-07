@@ -17,13 +17,13 @@ import com.mobilerechargeapp.util.ConnectionClass;
  * Servlet implementation class DeleteairtelController
  */
 @WebServlet("/DeleteairtelController")
-public class DeleteairtelController extends HttpServlet {
+public class DeleteAirtelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteairtelController() {
+    public DeleteAirtelController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -159,5 +159,33 @@ public class BsnlDAOImpl implements BsnlDao{
 		return rs;
 		
 	}
+	public BsnlUser findPlan(int id)
+	{
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
+		int validity=0;
+		//int JioUserId = jioDao.findjioId(jioUser.getPlanName(), jioUser.getPrice());
+		String Query = "select * from BSNL_plans where bsnlplan_id=" + id;
+		ResultSet rs = null;
+		BsnlUser plan=null;
+		try {
+
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(Query);
+			if(rs.next())
+			{
+				OperatorDAOImpl operDao=new OperatorDAOImpl();
+				Operator operator=operDao.findOperator(rs.getInt(6));
+				plan=new BsnlUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5),operator );
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return plan;
+		
+	}
+
 
 }

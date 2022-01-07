@@ -7,20 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mobilerechargeapp.daoimpl.VodafoneDAOImpl;
-import com.mobilerechargeapp.model.VodafoneUser;
+import com.mobilerechargeapp.daoimpl.BsnlDAOImpl;
+import com.mobilerechargeapp.daoimpl.OperatorDAOImpl;
+import com.mobilerechargeapp.model.BsnlUser;
+import com.mobilerechargeapp.model.Operator;
 
 /**
- * Servlet implementation class UpdatevodafoneController
+ * Servlet implementation class AddbsnlController
  */
-@WebServlet("/UpdatevodafoneController")
-public class UpdatevodafoneController extends HttpServlet {
+@WebServlet("/AddbsnlController")
+public class AddBsnlController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatevodafoneController() {
+    public AddBsnlController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +32,19 @@ public class UpdatevodafoneController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String planname=request.getParameter("planname");
 		Double  price=Double.parseDouble(request.getParameter("price"));
 		String validity=request.getParameter("validity");
 		String benefits=request.getParameter("benefits");
-		int vodafoneplanid =Integer.parseInt(request.getParameter("ViplanId"));
-		VodafoneUser vodafone = new VodafoneUser();
-		VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
-		boolean b=vodafoneDao.updateVodafone(planname, price, validity, benefits, vodafoneplanid);
+		String operatorName=request.getParameter("operatorName");
+		OperatorDAOImpl operatorDao=new OperatorDAOImpl();
+		Operator operator=operatorDao.findOperator(operatorName);
+		BsnlUser bsnlUser=new BsnlUser(planname,price,validity,benefits,operator);
+		BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
+		boolean b=bsnlDao.insertBsnlnetwork(bsnlUser);
 		if(b==true) {
-			response.sendRedirect("vodafone.jsp");
+			response.sendRedirect("bsnl.jsp");
 		}
 	}
 

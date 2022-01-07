@@ -48,9 +48,12 @@ public class RechargeController extends HttpServlet {
 		HistorydetailsDAOImpl hisDao=new HistorydetailsDAOImpl();
 		
 		
-		hisDao.insertDetails(history);
+		boolean b=hisDao.insertDetails(history);
+		if(b)
 		
-		response.getWriter().write("Recharged");
+		{
+			response.sendRedirect("history.jsp");
+		}
 		
 //		if(user!=null) {
 //			response.sendRedirect("his.jsp");

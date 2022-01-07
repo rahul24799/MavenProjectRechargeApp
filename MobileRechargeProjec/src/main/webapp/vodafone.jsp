@@ -47,6 +47,7 @@ for(int i=0;i<ShowViplan.size();i++)
 <td><%= vodafoneUser.getBenfits() %></td>
 <td><%= vodafoneUser.getOperator().getOperatorname() %></td>
 <td><a href="DeletevodafoneController?vodfoneId=<%= findvodafoneId %>">delete</a></td>
+<a href="UpdateVodafone.jsp">UPDATE</a>
 </tr>
 <%}%>
 </table>

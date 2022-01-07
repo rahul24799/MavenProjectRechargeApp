@@ -14,13 +14,13 @@ import com.mobilerechargeapp.daoimpl.VodafoneDAOImpl;
  * Servlet implementation class DeletevodafoneController
  */
 @WebServlet("/DeletevodafoneController")
-public class DeletevodafoneController extends HttpServlet {
+public class DeleteVodafoneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeletevodafoneController() {
+    public DeleteVodafoneController() {
         super();
         // TODO Auto-generated constructor stub
     }

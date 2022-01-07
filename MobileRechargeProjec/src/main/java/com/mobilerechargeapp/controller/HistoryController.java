@@ -18,13 +18,13 @@ import com.mobilerechargeapp.model.HistoryDetails;
  * Servlet implementation class HistorydetailsController
  */
 @WebServlet("/HistorydetailsController")
-public class HistorydetailsController extends HttpServlet {
+public class HistoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HistorydetailsController() {
+    public HistoryController() {
         super();
         // TODO Auto-generated constructor stub
     }

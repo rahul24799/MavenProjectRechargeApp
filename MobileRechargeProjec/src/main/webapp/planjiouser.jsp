@@ -13,12 +13,14 @@
 table,tr,td{
 border:1px solid black;
 border-collapse:collapse;
-
-
-}</style>
+text-align: left;
+height: 40px;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
 <body>
- <form align="center">
-  <table >
+ <form >
+  <table style="width:80%" >
     <tr>
    
     <td><strong>PlanName</strong></td>
@@ -36,7 +38,7 @@ JioDAOImpl jioDao=new JioDAOImpl();
 for(int i=0;i<ShowPlan.size();i++)
 {
 	JioUser jioUser=ShowPlan.get(i);
-	String planName=jioUser.getPlanName();
+	//String planName=jioUser.getPlanName();
 	
 %>
 

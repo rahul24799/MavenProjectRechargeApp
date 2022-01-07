@@ -45,11 +45,13 @@ for(int i=0;i<showBsnlplan.size();i++)
 <td><%= bsnlUser.getBenfits() %></td>
 <td><%= bsnlUser.getOperator().getOperatorname() %></td>
 <td><a href="DeletebsnlController?bsnlId=<%=findbsnlId %>">delete</a></td>
+<td><a href="updatebsnl.jsp">Update</a>
+<%-- <td><a href="updatebsnl.jsp?planName=<%=bsnlUser.getPlanName() %>">edit</a></td> --%>
 </tr>
 <%}%>
 </table>
   </form>
-  <a href="addbsnl.jsp">Insert NetWork</a><br>
-  <a href="updatebsnl.jsp">Update NetWork</a><br>
+  <a href="addbsnl.jsp">ADD NEW PLANS</a><br>
+
 </body>
 </html>

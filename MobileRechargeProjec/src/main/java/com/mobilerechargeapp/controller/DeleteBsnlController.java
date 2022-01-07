@@ -17,13 +17,13 @@ import com.mobilerechargeapp.util.ConnectionClass;
  * Servlet implementation class DeletebsnlController
  */
 @WebServlet("/DeletebsnlController")
-public class DeletebsnlController extends HttpServlet {
+public class DeleteBsnlController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeletebsnlController() {
+    public DeleteBsnlController() {
         super();
         // TODO Auto-generated constructor stub
     }

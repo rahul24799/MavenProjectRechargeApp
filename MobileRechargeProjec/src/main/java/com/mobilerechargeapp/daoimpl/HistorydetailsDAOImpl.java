@@ -76,11 +76,13 @@ public class HistorydetailsDAOImpl implements HistorydetailsDao {
 		
 		List<HistoryDetails> historyList=showHistoryDetails();
 		int userId=userDao.findUserId(user);
+		System.out.println(userId);
 		for(int i=0;i<historyList.size();i++)
 		{
 			if(historyList.get(i).getUserId()==userId)
 			{
 				userHistoryList.add(historyList.get(i));
+				System.out.println(historyList);
 			}
 			
 		}

@@ -1,31 +1,26 @@
 package com.mobilerechargeapp.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mobilerechargeapp.daoimpl.AirtelDAOImpl;
-import com.mobilerechargeapp.daoimpl.JioDAOImpl;
-import com.mobilerechargeapp.model.AirtelUser;
-import com.mobilerechargeapp.model.JioUser;
-import com.mobilerechargeapp.util.ConnectionClass;
+import com.mobilerechargeapp.daoimpl.BsnlDAOImpl;
+import com.mobilerechargeapp.model.BsnlUser;
 
 /**
- * Servlet implementation class UpdateairtrelController
+ * Servlet implementation class updatebsnlController
  */
-@WebServlet("/UpdateairtrelController")
-public class UpdateairtrelController extends HttpServlet {
+@WebServlet("/updatebsnlController")
+public class UpdateBsnlController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateairtrelController() {
+    public UpdateBsnlController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,15 +35,14 @@ public class UpdateairtrelController extends HttpServlet {
 		Double  price=Double.parseDouble(request.getParameter("price"));
 		String validity=request.getParameter("validity");
 		String benefits=request.getParameter("benefits");
-		int airtelplanId =Integer.parseInt(request.getParameter("airtelplanId"));
-		Connection con=ConnectionClass.getConnection();
-		AirtelUser airtelUser=new 	AirtelUser();
-		AirtelDAOImpl airtelDao=new AirtelDAOImpl();
-		boolean b=airtelDao.updateAirtel(planname, price, validity, benefits, airtelplanId);
+		int bsnlId =Integer.parseInt(request.getParameter("bsnlplanid"));
+		BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
+		BsnlUser bsnlUser=new BsnlUser();
+		boolean b=bsnlDao.updateBsnl(planname, price, validity, benefits, bsnlId);
 		if(b==true) {
-			response.sendRedirect("airtel.jsp");
+			response.sendRedirect("bsnl.jsp");
 		}
-    }
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

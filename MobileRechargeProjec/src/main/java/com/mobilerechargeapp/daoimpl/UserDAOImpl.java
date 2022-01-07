@@ -201,15 +201,15 @@ public class UserDAOImpl implements UserDao {
 		return user;
 		
 	}
-	public ResultSet history(User user) {
+	public ResultSet history(int userId) {
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
-		String joinQuery = "select u.user_name,o.operator_name,h.plan_id,h.Recharge_date,h.Payment from userlogin u join operator_details o on u.operator_id=o.operator_id join  history_details h on h.user_id=u.user_id where user_id="+user.getUserId();
+		String joinQuery = "select u.user_name,o.operator_name,h.plan_id,h.Recharge_date,h.Payment,h.mobile_number from userlogin u join operator_details o on u.operator_id=o.operator_id join  history_details h on h.user_id=u.user_id where h.user_id="+userId;
 		ResultSet rs = null;
 		try {
 			Statement stmt = con.createStatement();
 			rs = stmt.executeQuery(joinQuery);
-			System.out.println(rs);
+			//System.out.println(rs);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -165,5 +165,32 @@ public class AirtelDAOImpl implements AirtelDao {
 		return rs;
 		
 	}
+  public AirtelUser findPlan(int id)
+	{
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		AirtelDAOImpl airtelDao=new AirtelDAOImpl();
+		int validity=0;
+		//int JioUserId = jioDao.findjioId(jioUser.getPlanName(), jioUser.getPrice());
+		String Query = "select * from Airtel_plans where airtelplan_id=" + id;
+		ResultSet rs = null;
+	    AirtelUser plan=null;
+		try {
+
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(Query);
+			if(rs.next())
+			{
+				OperatorDAOImpl operDao=new OperatorDAOImpl();
+				Operator operator=operDao.findOperator(rs.getInt(6));
+				plan=new AirtelUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5),operator );
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return plan;
+		
+	}
 
 }

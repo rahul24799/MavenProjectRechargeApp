@@ -56,12 +56,13 @@ JioDAOImpl jioDao=new JioDAOImpl();
 <td><%= jioUser.getBenfits() %></td>
 <td><%= jioUser.getOperator().getOperatorname() %></td>
 <td><a href="deleteplan?jioId=<%= findjioId %>">delete</a></td>
+<td><a href="updateJio.jsp">Edit</a>
 
 </tr>
 <%}%>
 </table>
   
- 
+ <a href="addjio.jsp">ADD NEW PLANS</a>
 
 
 

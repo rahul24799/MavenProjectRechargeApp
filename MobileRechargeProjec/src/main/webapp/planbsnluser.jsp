@@ -28,7 +28,7 @@ border-collapse:collapse;
   	<td><strong>Operator</strong></td>
 <%
 BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
-List<BsnlUser>ShowPlan=bsnlDao.showBsnlplan();
+List<BsnlUser> ShowPlan=bsnlDao.showBsnlplan();
  
 for(int i=0;i<ShowPlan.size();i++){
 	BsnlUser bsnlUser=ShowPlan.get(i);

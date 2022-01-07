@@ -9,23 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mobilerechargeapp.daoimpl.AirtelDAOImpl;
 import com.mobilerechargeapp.daoimpl.OperatorDAOImpl;
-import com.mobilerechargeapp.model.AirtelUser;
+import com.mobilerechargeapp.daoimpl.VodafoneDAOImpl;
+import com.mobilerechargeapp.model.JioUser;
 import com.mobilerechargeapp.model.Operator;
+import com.mobilerechargeapp.model.VodafoneUser;
 import com.mobilerechargeapp.util.ConnectionClass;
 
 /**
- * Servlet implementation class AddairtelController
+ * Servlet implementation class AddvodafoneController
  */
-@WebServlet("/AddairtelController")
-public class AddairtelController extends HttpServlet {
+@WebServlet("/AddvodafoneController")
+public class AddVodafoneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddairtelController() {
+    public AddVodafoneController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +36,7 @@ public class AddairtelController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String planname=request.getParameter("planname");
 		Double  price=Double.parseDouble(request.getParameter("price"));
 		String validity=request.getParameter("validity");
@@ -43,12 +44,14 @@ public class AddairtelController extends HttpServlet {
 		String operatorName=request.getParameter("operatorName");
 		OperatorDAOImpl operatorDao=new OperatorDAOImpl();
 		Operator operator=operatorDao.findOperator(operatorName);
-		Connection con=ConnectionClass.getConnection();
-		AirtelUser airtelUser=new AirtelUser(planname,price,validity,benefits,operator);
-		AirtelDAOImpl airtelDao=new AirtelDAOImpl();
-		boolean b=airtelDao.insertAirtelnet(airtelUser);
+		VodafoneUser vodafoneUser=new VodafoneUser(planname,price,validity,benefits,operator);
+		VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
+		boolean b=vodafoneDao.vodafoneNetwork(vodafoneUser);
 		if(b==true) {
-			response.sendRedirect("airtel.jsp");
+			response.sendRedirect("vodafone.jsp");
+		}
+		else {
+			response.sendRedirect("invalid");
 		}
 	}
 

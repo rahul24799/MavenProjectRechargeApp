@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mobilerechargeapp.daoimpl.JioDAOImpl;
 import com.mobilerechargeapp.daoimpl.OperatorDAOImpl;
+import com.mobilerechargeapp.exception.PriceInvalid;
 import com.mobilerechargeapp.model.JioUser;
 import com.mobilerechargeapp.model.Operator;
 import com.mobilerechargeapp.util.ConnectionClass;
@@ -37,6 +38,7 @@ public class AddJioController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
 		String planname=request.getParameter("planname");
 		Double  price=Double.parseDouble(request.getParameter("price"));
 		String validity=request.getParameter("validity");
@@ -45,13 +47,25 @@ public class AddJioController extends HttpServlet {
 		OperatorDAOImpl operatorDao=new OperatorDAOImpl();
 		Operator operator=operatorDao.findOperator(operatorName);
 		Connection con=ConnectionClass.getConnection();
-		JioUser jioUser=new JioUser(planname,price,validity,benefits,operator);
-		JioDAOImpl jioDao=new JioDAOImpl();
-        boolean b = jioDao.insertJionet(jioUser);
-		
-		if(b == true) {
-			response.sendRedirect("jio.jsp");
+		if(price>0) {
+			JioUser jioUser=new JioUser(planname,price,validity,benefits,operator);
+			JioDAOImpl jioDao=new JioDAOImpl();
+	        boolean b = jioDao.insertJionet(jioUser);
+			
+			if(b == true) {
+				response.sendRedirect("jio.jsp");
+			}
 		}
+		else
+		{
+			throw new PriceInvalid();
+		}}
+		catch(PriceInvalid e)
+		{
+			response.sendRedirect("PriceInvalid.jsp?message="+e.getMessage());
+		}
+			
+		
 
 	    
 //		

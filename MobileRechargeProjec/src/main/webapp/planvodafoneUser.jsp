@@ -19,7 +19,7 @@ border-collapse:collapse;
 }</style>
 <body>
  <form align="center" >
-  <table >
+  <table>
     <tr>
    
     <td><strong>PlanName</strong></td>

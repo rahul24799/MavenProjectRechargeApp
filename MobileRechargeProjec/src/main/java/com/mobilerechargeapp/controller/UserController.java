@@ -56,11 +56,10 @@ public class UserController extends HttpServlet {
 		boolean b = userDao.insertUser(user);
 		
 		if(b == true) {
-			response.sendRedirect("login.jsp");
-		}
-		else {
 			response.sendRedirect("index.jsp");
 		}
+	
+		
 	}
 
 	/**

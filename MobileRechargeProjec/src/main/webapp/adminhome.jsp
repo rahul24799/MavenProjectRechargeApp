@@ -5,26 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>ModifyOperator</title>
+<style>
+</style>
 </head>
 <body>
 <h1> SELECT OPERATOR</h1>
 <form>
-
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="jio.jsp">JIO</a></li>
-      <li><a href="airtel.jsp">AIRTEL</a></li>
-      <li><a href="vodafone.jsp">VODAFONE</a></li>
-       <li><a href="bsnl.jsp">BSNL</a></li>
-    </ul>
-  </div>
-</nav>
 <a href="jio.jsp">JIO</a><br><br>
 <a href="airtel.jsp">AIRTEL</a><br><br>
 <a href="vodafone.jsp">VODAFONE</a><br><br>

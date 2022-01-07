@@ -12,5 +12,6 @@ public interface AirtelDao {
 	 public List<AirtelUser>showAirtelplan();
 	 public  int  findairtelId(String planName,Double price);
 	 public ResultSet  findAirtelvalidity();
+	  public AirtelUser findPlan(int id);
 	 
 }

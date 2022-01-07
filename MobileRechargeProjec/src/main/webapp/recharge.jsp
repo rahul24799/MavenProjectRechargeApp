@@ -40,6 +40,14 @@ User user=(User)session.getAttribute("CurrentUser");
 	double amount=Double.parseDouble(request.getParameter("price"));
 	System.out.println(amount);
 	int planId;
+/* 	 userId = userdao.findUserId(currentUser); */
+	/* operatorId =  */
+
+	
+	
+	
+	
+	
 	 if (operator.equals("jio")){
 	 JioDAOImpl jioDao=new JioDAOImpl();
      planId=jioDao.findjioId(planName, amount);
@@ -48,17 +56,22 @@ User user=(User)session.getAttribute("CurrentUser");
      else if(operator.equals("Airtel")){
      AirtelDAOImpl airtelDao=new AirtelDAOImpl();
 	 planId=airtelDao.findairtelId(planName, amount);
+	   System.out.println(planId);
      }
-     else if (operator.equals("Vodafone")){
+     else if(operator.equals("Vodafone")){
 	 VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
 	 planId=vodafoneDao.findvodafoneId(planName, amount);
-     }else{
+	   System.out.println(planId);
+     }else {
 	 BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
 	 planId=bsnlDao.findbsnlId(planName, amount);
+	   System.out.println(planId);
      }
 	 
 	Date today=new Date();
    HistoryDetails hDetails=new HistoryDetails(userId,operatorId,0,planId,today,amount);
+    System.out.println(userId+" "+hDetails);
+    
    session.setAttribute("history", hDetails);
    user.setWallet(user.getWallet()-amount);
    userDao.updateuserWallet(user);

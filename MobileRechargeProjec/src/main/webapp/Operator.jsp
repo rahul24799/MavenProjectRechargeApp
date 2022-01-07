@@ -1,4 +1,10 @@
 
+<%@page import="com.mobilerechargeapp.model.BsnlUser"%>
+<%@page import="com.mobilerechargeapp.daoimpl.BsnlDAOImpl"%>
+<%@page import="com.mobilerechargeapp.model.VodafoneUser"%>
+<%@page import="com.mobilerechargeapp.daoimpl.VodafoneDAOImpl"%>
+<%@page import="com.mobilerechargeapp.model.AirtelUser"%>
+<%@page import="com.mobilerechargeapp.daoimpl.AirtelDAOImpl"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.time.Duration"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -19,57 +25,91 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>selectyour network</title>
+<style>
+
+
+</style>
 </head>
 <body>
 <h1>Select Your NetWork</h1>
 
-
+<nav>
 <a href="planjiouser.jsp"><h1>Jio</h1></a><br>
 <a href="planairteluser.jsp"><h1>Airtel</h1></a><br>
 <a href="planvodafoneUser.jsp"><h1>vodafone</h1></a><br>
 <a href="planbsnluser.jsp"><h1>Bsnl</h1></a><br>
 <a href="wallet.jsp"><h1>wallet</h1></a>
-
+</nav>
 <%User user =(User)session.getAttribute("CurrentUser");
-long daysBetween=0;
-if(user.getOperator().equals("jio"))
-{
+long validity=0;
+
+
 	HistorydetailsDAOImpl hisDao=new HistorydetailsDAOImpl();
 	List<HistoryDetails> rechargeHistory=hisDao.findUserHistory(user);
+	if(rechargeHistory.size()>0)
+	{
 	HistoryDetails history=rechargeHistory.get(0);
 	OperatorDAOImpl operDao=new OperatorDAOImpl();
 	Operator operator=operDao.findOperator(history.getOperatorId());
-	JioUser plan=null;
+	Date sysDate=new Date();
+	long timediff=sysDate.getTime()-history.getRechargeDate().getTime();
+	long days=timediff/(1000*60*60*24)%365;
+	if(operator!=null)
+	{
+	JioUser planJio=null;
+	AirtelUser	planAirtel=null;
+	VodafoneUser planVodafone=null;
+	BsnlUser planBsnl=null;
 	if(operator.getOperatorname().equals("jio"))
 	{
-		System.out.println ("Days: " + daysBetween);
 		
 		JioDAOImpl jioDao=new JioDAOImpl();
-		plan=jioDao.findPlan(history.getPlanId());
+		planJio=jioDao.findPlan(history.getPlanId());
+		 System.out.println(planJio);
+		validity=Integer.valueOf(planJio.getValidity().split(" ")[0])-days;
+	    System.out.println ("Days: "+validity );
+		
+		
+	}
+	else if(operator.getOperatorname().equals("Airtel")){
+		AirtelDAOImpl airtelDao=new AirtelDAOImpl();
+	planAirtel=airtelDao.findPlan(history.getPlanId());
+	validity=Integer.valueOf(planAirtel.getValidity().split(" ")[0])-days;
+    System.out.println ("Days: "+validity );
+	}
+	else if(operator.getOperatorname().equals("Vodafone")){
+		VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
+		planVodafone=vodafoneDao.findPlan(history.getPlanId());
+		validity=Integer.valueOf(planVodafone.getValidity().split(" ")[0])-days;
+	    System.out.println ("Days: "+validity );
+	}
+	else if(operator.getOperatorname().equals("BSNL")) {
+		BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
+		planBsnl=bsnlDao.findPlan(history.getPlanId());
+		validity=Integer.valueOf(planBsnl.getValidity().split(" ")[0])-days;
+	    System.out.println ("Days: "+validity );
 		
 	}
 	
-	Date sysDate=new Date();
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	
+	
+	/* if(plan!=null)
+	{
+	validity=Integer.valueOf(plan.getValidity().split(" ")[0])-days;
+	    System.out.println ("Days: "+validity );
+	
+	}    */
+	}
+	}
+	
 	
 
-	    LocalDateTime date1 = LocalDateTime.parse(history.getRechargeDate().toString(), dtf);
-	    LocalDateTime date2 = LocalDateTime.parse(sysDate.toString(), dtf);
-	    daysBetween = Duration.between(date1, date2).toDays();
-	    System.out.println ("Days: " + daysBetween);
-
-	
-	//int days=new Date(sysDate.getTime()-history.getRechargeDate().getTime());
-	//int RemainingValidity=(history.getRechargeDate()-plan.getValidity();
-	
-	/*
-	JioDAOImpl jioDao=new JioDAOImpl();
-	jioDao.findJiovalidity(user);
-	*/
-	
-}
 %>
-<h1><%= daysBetween %> Validity</h1>
+<%-- <%if(validity<=10) { %> --%>
+<h1><%=  validity %> Validity Recharge Fast</h1>
+
+
+<%-- <%} %> --%>
 </body>
 </html>

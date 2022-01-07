@@ -46,13 +46,13 @@ for(int i=0;i<ShowPlan.size();i++)
 <td><%= airtelUser.getBenfits() %></td>
 <td><%= airtelUser.getOperator().getOperatorname() %></td>
 <td><a href="DeleteairtelController?airtelId=<%= findAirtelId %>">delete</a></td>
+<td><a href="updateairtel.jsp">Edit</a>
 </tr>
 <%}%>
 </table>
 
  <form>
 <a href="addairtel.jsp"><h2>Insert</h2></a>
-<a href="updateairtel.jsp"><h2>Update</h2></a>
 
 </form>
 </body>

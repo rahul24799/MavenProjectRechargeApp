@@ -10,28 +10,37 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title></title>
+<title>UserHistoryDetails</title>
+<style type="text/css">
+table,tr,td{
+border:1px solid black;
+border-collapse:collapse;
+
+}</style>
 </head>
 <body>
-	
+
 	<h1>History Details</h1>
 	<%
-	User user = (User) session.getAttribute("CurrentUser");
+	//User user = (User) session.getAttribute("CurrentUser");
+	 HistoryDetails history=(HistoryDetails)session.getAttribute("history");
+	 
 	
 	HistorydetailsDAOImpl historyDao = new HistorydetailsDAOImpl();
 	UserDAOImpl userDao = new UserDAOImpl();
-	ResultSet rs = userDao.history(user);
+	ResultSet rs = userDao.history(history.getUserId());
 	
 	%>
-	<h3><%= user%>User</h3>
+	<%=history.getUserId()%>
+
 	<table>
 		<tr>
-			<th>userId</th>
-			<th>operatorId</th>
-			<th>mobileNumber</th>
-			<th>planId</th>
-			<th>RechargeDate</th>
-			<th>payment</th>
+			<td>userName</td>
+			<td>operatorName</td>
+			<td>planId</td>
+			<td>RechargeDate</td>
+			<td>payment</td>
+			<td>mobileNumber</td>
 		</tr>
 		<%
 		while(rs.next()) {
@@ -39,9 +48,10 @@
 		<tr>
 			<td><%=rs.getString(1)%></td>
 			<td><%=rs.getString(2)%></td>
-			<td><%=rs.getInt(3)%></td>
+			<td><%=rs.getInt(3) %></td>
 			<td><%=rs.getDate(4)%></td>
 			<td><%=rs.getDouble(5)%></td>
+			<td><%=rs.getLong(6) %></td>
 		</tr>
 		<%
 		}

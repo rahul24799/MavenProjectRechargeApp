@@ -162,4 +162,32 @@ public class VodafoneDAOImpl implements VodafoneDao {
 		return rs;
 		
 	}
+	public VodafoneUser findPlan(int id)
+	{
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
+		int validity=0;
+		//int JioUserId = jioDao.findjioId(jioUser.getPlanName(), jioUser.getPrice());
+		String Query = "select * from vodafone_plans where vodafoneplan_id=" + id;
+		ResultSet rs = null;
+	VodafoneUser plan=null;
+		try {
+
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(Query);
+			if(rs.next())
+			{
+				OperatorDAOImpl operDao=new OperatorDAOImpl();
+				Operator operator=operDao.findOperator(rs.getInt(6));
+				plan=new VodafoneUser  (rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5),operator );
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return plan;
+		
+	}
+
 }

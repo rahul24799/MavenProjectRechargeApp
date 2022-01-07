@@ -116,6 +116,7 @@ public class JioDAOImpl implements JioDao {
 	}
 
 	public int findjioId(String planName, Double price) {
+//		System.out.println(planName);
 		String query = "select jioplan_id from jio_plans where plan_name=? and price=?";
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
@@ -128,7 +129,7 @@ public class JioDAOImpl implements JioDao {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				jioplanId = rs.getInt(1);
-				System.out.println(rs.getInt(1));
+				//System.out.println(rs.getInt(1));
 				return jioplanId;
 			}
 		} catch (SQLException e) {

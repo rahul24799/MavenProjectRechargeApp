@@ -9,24 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mobilerechargeapp.daoimpl.OperatorDAOImpl;
-import com.mobilerechargeapp.daoimpl.VodafoneDAOImpl;
+import com.mobilerechargeapp.daoimpl.JioDAOImpl;
 import com.mobilerechargeapp.model.JioUser;
-import com.mobilerechargeapp.model.Operator;
-import com.mobilerechargeapp.model.VodafoneUser;
 import com.mobilerechargeapp.util.ConnectionClass;
 
 /**
- * Servlet implementation class AddvodafoneController
+ * Servlet implementation class UpdatejioController
  */
-@WebServlet("/AddvodafoneController")
-public class AddvodafoneController extends HttpServlet {
+@WebServlet("/UpdatejioController")
+public class UpdateJioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddvodafoneController() {
+    public UpdateJioController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,23 +33,22 @@ public class AddvodafoneController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String planname=request.getParameter("planname");
 		Double  price=Double.parseDouble(request.getParameter("price"));
 		String validity=request.getParameter("validity");
 		String benefits=request.getParameter("benefits");
-		String operatorName=request.getParameter("operatorName");
-		OperatorDAOImpl operatorDao=new OperatorDAOImpl();
-		Operator operator=operatorDao.findOperator(operatorName);
-		VodafoneUser vodafoneUser=new VodafoneUser(planname,price,validity,benefits,operator);
-		VodafoneDAOImpl vodafoneDao=new VodafoneDAOImpl();
-		boolean b=vodafoneDao.vodafoneNetwork(vodafoneUser);
+		int jioplanId =Integer.parseInt(request.getParameter("jioplanId"));
+		Connection con=ConnectionClass.getConnection();
+		JioUser jioUser=new JioUser();
+		JioDAOImpl jioDao=new 	JioDAOImpl();
+		boolean b=jioDao.updateJio(planname, price, validity, benefits, jioplanId);
 		if(b==true) {
-			response.sendRedirect("vodafone.jsp");
+			response.sendRedirect("jio.jsp");
 		}
-		else {
-			response.sendRedirect("invalid");
-		}
+		
+		
+		
 	}
 
 	/**
