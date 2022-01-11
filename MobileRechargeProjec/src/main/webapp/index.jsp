@@ -1,139 +1,138 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>LoginPage</title>
 <style>
+* {
+	margin: 0%;
+	padding: 0%;
+	box-sizing: border-box;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+/* 	cursor: pointer; */
+}
 
-body{
-    margin: 0%;
-    padding: 0%;
-    font-family: sans-serif;
-    background: linear-gradient(120deg,#2980b9,#8eaaad);
-    height: 100vh;
-    overflow: hidden;
-  }
- .center{
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
-width: 400px;
-background: white;
-border-radius: 10px;
- }
- 
-.center h1{
-    text-align: center;
-    padding: 0 0 20px 0 ;
-    border-bottom: 1px solid silver;
+body {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to right, #3f56fb, #fc466b);
 }
-.center form{
-    padding:0 40px;
-   box-sizing: border-box;
-}
-form.txt-field{
-position: relative;
-border-bottom: 2px solid #adadad;
-margin: 30px 0;
-}
-.txt-field input{
-    width: 100%;
-    padding: 0 5px;
-    height: 40px;
-    font-size: 16px;
-    border:windowframe;
-    background: none;
-    outline:auto;
 
+form {
+    width: 25rem;
+    /* height: 28rem; */
+    padding: 45px 0px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    border-radius: 30px;
+    border-left: 1px solid;
+    border-left: 1px solid rgba(255, 255, 255, .3);
 }
-.txt_field label{
-    position: absolute;
-    top: 50px;
-    left: 5px;
-    color: #adadad;
-    transform: translate(-50%);
-    font-size: 16px;
-    pointer-events: none;
-    transition: .5s;
+ /* form:after{
+content:'';
+position:absolute;
+bottom:3%;
+right:200px;
+height:200px;
+background:green;
+border-radius:50%;
+z-index:-1;
+opacity:.8;
+}  */
+
+h1 {
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+	letter-spacing: 3px;
+	margin-bottom: 5%;
+ 	opacity: .7; 
 }
-.txt-field span::before{
-    content: '';
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    
+
+label {
+	font-size: 20px;
+	color: white;
+	margin-left: 10%;
+	opacity:.8;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
 }
-.txt-field input:focus ~label,
-.txt-field input:valid ~label{
-    top: -5px;
-    color: #2691d9;
-}
-.txt-field input:focus ~span::before,
-.txt-field input:valid ~span::before{
-    width: 100%;
-}
-input[type="submit"]{
-    width: 100%;
-    height: 50%;
-    border: 1px solid;
-    background: #2691d9;
-    border-radius: 25px;
-    font-size: 18px;
-    color: #e9f4fb;
-    font-weight: 700;
-    cursor: pointer;
+
+input {
+    font-size: 20px;
+    width: 80%;
+    margin: 2% auto;
+    margin-bottom: 3%;
+    border: none;
+    padding: 5px;
     outline: none;
-}
-input[type="submit"]:hover{
-    border-color: #2691d9;
-    transition: .5s;
-}
-.signup_link{
-    margin: 30px 0;
-    text-align: center;
-    font-size: 16px;
-    color: #666666;
-}
-.signup_link a{
-color: #2691d9;
-text-decoration: none;
-}
-.signup_link a:hover{
-    text-decoration: underline;
+    background: #0000003d;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
 
+button {
+	width: 50%;
+	margin: 3% auto;
+	color:white;
+	font-size:15px;
+	opacity:.7;
+	background:rgba(255,255,255,0.06);
+	padding:10px 30px;
+	border:none;
+	outline:none;
+	border-radiurs:20px;
+	text-shadow:2px 2px 4px rgba(255,255,255,0.2);
+	box-shadow:3px 3px 5px rgba(31,38,135,.37);
+	border-left:1px solid rgba(255,255,255,.3);
+	border-top:1px solid rgba(255,255,255,.3)
+}
+a{
+  font-size:13px;
+  text-align:center;
+  color:white;
+}
 </style>
-
+<!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-    <div class="center">
-    <h1 style=" font-style: italic;" > Login </h1>
-<Form action="AdminController" method="get">
-<div class="txt-field">
-  
-  
-<label for="Email">Email-id</label>
-<span></span>
-<input type="email" name="email" id="Email" autofocus required  pattern="[a-z][a-z0-9]+[@][a-z]+[.][a-z]+"><br>
-</div>
-<div class="txt-field" >
-    <label for="PASSWORD">Password</label>
-    <span></span>
-<input type="password" name="password" id="PASSWORD" required><br>
-</div>
-<input type="submit" value="login">
-<div class="signup_link">
-<a href="register.jsp">SignUp?</a>
+<div>
+<!-- <h1>Mobile Recharge App</h1> -->
+ <%String message=(String)session.getAttribute("invalid"); 
+ if(message!=null){%>
+ <h1><%=message %></h1>
+ <%session.removeAttribute("invalid"); %>
+ <%} %>
+	<Form action="AdminController" method="get">
+		<h1 style="font-style: italic;">Login</h1>
 
 
+		<label for="Email">Email-id</label>
+		 <input type="email" name="email"
+			id="Email" title="must follow the email format" autofocus required
+			pattern="[a-z][a-z0-9]+[@][a-z]+[.][a-z]+"><br> <span></span>
 
- </Form>
+
+		<label for="PASSWORD">Password</label> 
+		<input type="password"
+			name="password" id="PASSWORD" pattern="[a-zA-Z0-9&@#$_]{8,15}"
+			title="8
+				 or more character may include (&@#$_)" required>
+
+
+       <button>LOGIN</button>
+       <a href="register.jsp">SignUp?</a> 
+<!--  <input type="sumbit" value="login"> -->
+	</Form>
 </div>
 </body>
 </html>

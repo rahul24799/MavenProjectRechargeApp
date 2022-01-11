@@ -57,7 +57,7 @@ public class HistoryController extends HttpServlet {
 		boolean b = historyDao.insertDetails(historyDetails);
 	
 		if(b == true) {
-			response.sendRedirect("vodafone.jsp");
+			response.sendRedirect("operator.jsp");
 		}
 	
 				

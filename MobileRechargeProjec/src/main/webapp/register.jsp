@@ -1,54 +1,117 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>UserRegister</title>
 <style>
- label{
-width:120px;
-display:inline-block;
+* {
+	margin: 0%;
+	padding: 0%;
+	box-sizing: border-box;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+/* 	cursor: pointer; */
 }
-
+body {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to right, #3f56fb, #fc466b);
+}
+form {
+    width: 27rem;
+    padding: 29px 16px;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    border-radius: 30px;
+    border-left: 1px solid;
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-left: 1px solid rgba(255, 255, 255, .3);
+}
+h1 {
+    text-align: center;
+    font-size: 21px;
+    color: white;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 20%);
+    letter-spacing: 3px;
+    margin-bottom: 2%;
+    opacity: .7;
+    margin-top: 10px;
+}
+label {
+    font-size: 15px;
+    color: white;
+    opacity: .8;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 20%);
+    text-align: left;
+    margin-top: 11px;
+    display: block;
+}
+input {
+    font-size: 20px;
+    width: 100%;
+    margin: 0px auto;
+    border: none;
+    outline: none;
+    background: #00000030;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+    padding: 2px 15px;
+}
+.formBtn input {
+    border: 1px solid;
+    display: block;
+    background: none;
+    width: auto;
+    padding: 6px 26px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-top: 17px;
+}
 </style>
+
 </head>
 <body>
-<form action="UserController" style="text-align: center" method="get" >
-<div style="text-align:center">
-    <h1 style="color: rgb(102, 153, 7); font-style: italic;">Register Login </h1>
-    
-   <div>
-    <label for="Username"><strong>UserName:</strong></label>
-    <input type="text" name="username" id="Username" ><br><br> 
-  </div>
-  <div>
-    <label for="Email"><strong>Email-id:</strong></label>
-    <input type="email" name="email" id="Email" autofocus required placeholder="abcd22@gmail.com" pattern="[a-z][a-z0-9]+[@][a-z]+[.][a-z]+"><br><br>
-</div>
-<div>
-     <label for="Mobilenumber"><strong>MobileNumber:</strong></label>
-     <input type="number" name="phonenumber" id="Mobilenumber"  required><br><br>
-</div>
-<div>
-     <label for="PASSWORD"><strong>Password:</strong></label>
-     <input type="password" name="password" id="Password" required><br><br>
- </div> 
- <div>
-     <label for="Operatorname"><strong>OperatorName</strong></label>
-     <input type=""text" name="operatorName" id="Operatorname"  required><br><br>
-  </div> 
-  <div> 
-      <label for="wallet"><strong>Wallet</strong></label>
-      <input type="number" name="wallet" id="wallet"  required><br><br>
-   </div>  
-      <input type="submit" value="SignIn"> 
-               
-</div>
-    
-   
-    
-</form>  
-       
+<%String UserError=(String)session.getAttribute("email");
+if(UserError!=null){
+%>
+<h1><%=UserError %></h1>
+<%session.removeAttribute("email"); %>
+<%} %>
+	<form action="UserController" style="text-align: center" method="get">
+
+		<h1 style="font-style: italic;">Register Login</h1>
+
+
+		<label for="Username">UserName:</label> <input type="text"
+			name="username" id="Username"> <label for="Email">Email-id:</label>
+		<input type="email" name="email" id="Email"
+			title="must follow the email format" autofocus required
+			pattern="[a-z][a-z0-9]+[@][a-z]+[.][a-z]+"><br> <label
+			for="Mobilenumber">MobileNumber:</label> <input type="number"
+			name="phonenumber" id="Mobilenumber" pattern="[6-9]{1}[0-9]{9}"
+			title="Phone number with 7-9 and remaing 9 digit with 0-9" required><br>
+		<label for="PASSWORD">Password:</label> <input type="password"
+			name="password" id="Password" pattern="[a-zA-Z0-9&@#$_]{8,15}"
+			title="8
+				 or more character may include (&@#$_)" required><br>
+		<label for="Operatorname">OperatorName</label> <input type="text"
+			name="operatorName" id="Operatorname" required><br> 
+			
+			<div class="formBtn">
+			
+			 <input type="submit"
+			value="SignIn">
+			</div>
+
+
+	</form>
+
 </body>
 </html>

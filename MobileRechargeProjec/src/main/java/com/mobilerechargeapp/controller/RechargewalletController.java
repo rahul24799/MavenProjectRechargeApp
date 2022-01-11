@@ -35,7 +35,7 @@ public class RechargewalletController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String EmailId=request.getParameter("emailid");
+		
 		Double amount = Double.parseDouble(request.getParameter("amount"));
 
 		UserDAOImpl userDao=new UserDAOImpl();
@@ -43,8 +43,11 @@ public class RechargewalletController extends HttpServlet {
         User user=(User)session.getAttribute("CurrentUser");
         user.setWallet(user.getWallet()+amount);
 		int i=userDao.updateuserWallet(user);
-		if(user!=null) {
-			response.sendRedirect("planjiouser.jsp");
+		if(i>0) {
+	          session.setAttribute("recharge", 1);
+	          response.sendRedirect("wallet.jsp");
+	          
+			
 		}
 		else {
 			response.sendRedirect("wallet.jsp");

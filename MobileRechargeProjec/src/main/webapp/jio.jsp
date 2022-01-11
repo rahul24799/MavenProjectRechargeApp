@@ -9,22 +9,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>JioNetwork</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+table, tr, td {
+    text-align: left;
+    height: 40px;
+    padding: 3px 10px;
+    margin-top:10px;
+}
+tr:hover {background-color:threedlightshadow;}
+tr:nth-child(even) {background-color: #f2f2f2;}
+<style>
+
+
+</style>
+
+
 </head>
 <body>
-<form>
 <h1><strong>JIO NETWORK</strong></h1>
-
-<style type="text/css">
-table,tr,td{
-border:1px solid black;
-border-collapse:collapse;
-
-}</style>
-</head>
-<body>
-  <h1>ShowPlan</h1>
   
-  <table >
+  <table style="width:100%" >
     <tr>
     <td><strong>plan-Id</strong></td>
     <td><strong>PlanName</strong></td>
@@ -62,7 +69,7 @@ JioDAOImpl jioDao=new JioDAOImpl();
 <%}%>
 </table>
   
- <a href="addjio.jsp">ADD NEW PLANS</a>
+
 
 
 

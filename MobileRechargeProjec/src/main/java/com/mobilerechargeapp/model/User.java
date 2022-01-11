@@ -86,6 +86,14 @@ public class User {
 //	}
 //	
 	
+	public User(String username2, String email, long phonenumber2, String password2, Operator operator2) {
+		this.username = username2;
+		this.emailid = email;
+		this.phonenumber = phonenumber2;
+		this.password = password2;
+		
+		this.operator = operator2;
+	}
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", emailid=" + emailid + ", phonenumber=" + phonenumber + ", password="

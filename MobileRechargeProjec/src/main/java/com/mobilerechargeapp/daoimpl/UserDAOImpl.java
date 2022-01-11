@@ -26,7 +26,7 @@ public class UserDAOImpl implements UserDao {
 
 			
 //			System.out.println(opId);
-			String insertQuery = "insert into userlogin (user_name,Email_id,phone_number,password,wallet,operator_Id) values(?,?,?,?,?,?)";
+			String insertQuery = "insert into userlogin (user_name,Email_id,phone_number,password,operator_Id) values(?,?,?,?,?)";
 
 			PreparedStatement pstmt = con.prepareStatement(insertQuery);
 
@@ -34,8 +34,8 @@ public class UserDAOImpl implements UserDao {
 			pstmt.setString(2, user.getEmailid());
 			pstmt.setLong(3, user.getPhonenumber());
 			pstmt.setString(4, user.getPassword());
-			pstmt.setDouble(5, user.getWallet());
-			pstmt.setInt(6, user.getOperator().getOperatorId1());
+		
+			pstmt.setInt(5, user.getOperator().getOperatorId1());
 			
 //			System.out.println(user.getOperator().getOperatorname());
 			flag = pstmt.executeUpdate() > 0;

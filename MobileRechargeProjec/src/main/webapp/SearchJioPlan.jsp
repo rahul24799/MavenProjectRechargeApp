@@ -1,15 +1,15 @@
-<%@page import="com.mobilerechargeapp.model.BsnlUser"%>
+<%@page import="com.mobilerechargeapp.daoimpl.JioDAOImpl"%>
+<%@page import="com.mobilerechargeapp.model.JioUser"%>
 <%@page import="java.util.List"%>
-<%@page import="com.mobilerechargeapp.daoimpl.BsnlDAOImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>selectBsnlPlans</title>
-<style type="text/css">
-
+<title>Insert title here</title>
+</head>
+<style>
 body{
 overflow: hidden;
 }
@@ -67,7 +67,7 @@ td.links a {
 	display: flex;
 	justify-content: space-around;
 	position: absolute;
-	top:0px;
+	top:30px;
 	width: 100%;
 }
 
@@ -76,45 +76,50 @@ td.links a {
 	color: black;
 }
 </style>
-
-</head>
 <body>
+<form>
+<%String planName=request.getParameter("jioplan");
+JioDAOImpl jioPlan=new JioDAOImpl();
+List<JioUser> jioUserSearch=jioPlan.searchJioplan(planName);
+for(int i=0;i<jioUserSearch.size();i++){
+	JioUser jioSearch=jioUserSearch.get(i);
+%>
+
 	<div class="header">
 		<a href="Operator.jsp">Home</a> <a href="wallet.jsp">wallet</a> <a
 			href="history.jsp">RechargeHistory</a> <a href="aboutus.jsp">AboutUs</a>
-		<a href="contectus.jsp">ContectUs</a> <a href="logout.jsp">Logout</a>
+		<a href="contectus.jsp">ContectUs</a>
+		
+		 <a href="logout.jsp">Logout</a>
 	</div>
-	<form>
-		<table>
-			<tr>
-
-				<td><strong>PlanName</strong></td>
-				<td><strong>Price</strong></td>
-				<td><strong>validity</strong></td>
-				<td><strong>Benefit</strong></td>
-				<td><strong>Operator</strong></td>
-				<%
-BsnlDAOImpl bsnlDao=new BsnlDAOImpl();
-List<BsnlUser> ShowPlan=bsnlDao.showBsnlplan();
- 
-for(int i=0;i<ShowPlan.size();i++){
-	BsnlUser bsnlUser=ShowPlan.get(i);
-	String planName=bsnlUser.getPlanName();
-	%>
-			
-			<tr>
-				<td><%= bsnlUser.getPlanName() %></td>
-				<td><%= bsnlUser.getPrice() %></td>
-				<td><%= bsnlUser.getValidity() %></td>
-				<td><%= bsnlUser.getBenfits() %></td>
-				<td><%= bsnlUser.getOperator().getOperatorname() %></td>
-				<td><a
-					href="recharge.jsp?planName=<%=bsnlUser.getPlanName() %>&price=<%=  bsnlUser.getPrice() %>
-&operator=<%= bsnlUser.getOperator().getOperatorname() %>">Recharge</a></td>
-			</tr>
-			<%}%>
-
-		</table>
 	</form>
+	<table style="width: 100%">
+		<tr>
+
+			<td><strong>PlanName</strong></td>
+			<td><strong>Price</strong></td>
+			<td><strong>validity</strong></td>
+			<td><strong>Benefit</strong></td>
+			<td><strong>Operator</strong></td>
+
+
+		</tr>
+		
+
+		<tr>
+			<td><%= jioSearch.getPlanName() %></td>
+			<td><%= jioSearch.getPrice() %></td>
+			<td><%= jioSearch.getValidity() %></td>
+			<td><%= jioSearch.getBenfits() %></td>
+			<td><%= jioSearch.getOperator().getOperatorname() %></td>
+			<td class="links"><a
+				href="recharge.jsp?planName=<%=jioSearch.getPlanName() %>&price=<%= jioSearch.getPrice() %>
+&operator=<%= jioSearch.getOperator().getOperatorname() %>"><button>Recharge</a>
+				</button></td>
+		</tr>
+
+		<%}%>
+	</table>
+
 </body>
 </html>

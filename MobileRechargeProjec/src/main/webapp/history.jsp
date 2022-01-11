@@ -12,11 +12,21 @@
 <meta charset="ISO-8859-1">
 <title>UserHistoryDetails</title>
 <style type="text/css">
-table,tr,td{
-border:1px solid black;
-border-collapse:collapse;
 
-}</style>
+table {
+	/*  background: cornflowerblue; */
+	background: inactiveborder;
+	padding: 10px;
+}
+
+table, tr, td {
+	text-align: left;
+	height: 40px;
+	padding: 3px 10px;
+	margin-top: 10px;
+	font-size: medium;
+}
+</style>
 </head>
 <body>
 
@@ -29,6 +39,7 @@ border-collapse:collapse;
 	HistorydetailsDAOImpl historyDao = new HistorydetailsDAOImpl();
 	UserDAOImpl userDao = new UserDAOImpl();
 	ResultSet rs = userDao.history(history.getUserId());
+	
 	
 	%>
 	<%=history.getUserId()%>

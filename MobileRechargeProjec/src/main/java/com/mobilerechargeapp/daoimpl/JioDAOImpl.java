@@ -116,7 +116,6 @@ public class JioDAOImpl implements JioDao {
 	}
 
 	public int findjioId(String planName, Double price) {
-//		System.out.println(planName);
 		String query = "select jioplan_id from jio_plans where plan_name=? and price=?";
 		ConnectionClass conclass = new ConnectionClass();
 		Connection con = conclass.getConnection();
@@ -129,7 +128,6 @@ public class JioDAOImpl implements JioDao {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				jioplanId = rs.getInt(1);
-				//System.out.println(rs.getInt(1));
 				return jioplanId;
 			}
 		} catch (SQLException e) {
@@ -213,12 +211,40 @@ public class JioDAOImpl implements JioDao {
 				plan=new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5),operator );
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return plan;
 		
 	}
+	public List<JioUser> searchJioplan(String plan) {
+		JioUser jio = null;
+		List<JioUser> jioList = new ArrayList<JioUser>();
+		String showQuery = "select * from jio_plans where upper (PLAN_NAME) like'" +plan.toUpperCase()+"%'";
+		ConnectionClass conclass = new ConnectionClass();
+		Connection con = conclass.getConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(showQuery);
+			OperatorDAOImpl operatordao = new OperatorDAOImpl();
+
+			while (rs.next()) {
+
+				Operator operator = operatordao.findOperator1(rs.getInt(6));
+
+//			System.out.println(operator);
+				jio = new JioUser(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), operator);
+				jioList.add(jio);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return jioList;
+	}
+	
+	
+	
+	
 
 	
 	

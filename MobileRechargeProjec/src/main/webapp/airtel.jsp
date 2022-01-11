@@ -10,16 +10,60 @@
 <title>AirtelNetwork</title>
 </head>
 <style type="text/css">
-table,tr,td{
-border:1px solid black;
-border-collapse:collapse;
+
+table {
+    background: cornflowerblue;
+    padding: 10px;
+}
+table, tr, td {
+    text-align: left;
+    height: 40px;
+    padding: 3px 10px;
+    margin-top:10px;
+}
+tr:nth-child(even) {
+    background-color: #3f56fb;
+    color: white;
+    padding: 10px;5
+    margin-left: 19px; 
+}
+td.links {
+    text-align: center;
+}
+
+td.links a {
+    color:maroon;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 15px;
+   /*  background: aliceblue; */
+    padding: 9px;
+}
+.header a {
+    padding: 12px 28px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+.header {
+    background: linear-gradient(to right, #3f56fb, #fc466b);
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+}
+.header a:hover {
+    background: white;
+    color: black;
+}
 
 }</style>
 </head>
 <body style="text-align: center;">
  <h1>AIRTEL PLAN</h1>
 
-  <table >
+  <table style="width:100%">
     <tr>
     <td><strong>plan-Id</strong></td>
     <td><strong>PlanName</strong></td>

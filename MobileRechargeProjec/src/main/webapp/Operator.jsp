@@ -21,26 +21,100 @@
 <%@page import="com.mobilerechargeapp.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>selectyour network</title>
+<title>select your network</title>
 <style>
+/* 
+ body{
+background: linear-gradient(to right, #3f56fb, #fc466b);
+}  */
+.header a {
+    padding: 12px 28px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
 
-
+.header {
+    background: linear-gradient(to right, #3f56fb, #fc466b);
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+}
+.singleCard a {
+    margin: -7px 15px;
+    text-decoration: none;
+}
+.singleCard img {
+    width: 15%;
+}
+.singleCard {
+    width: 33%;
+    display: flex;
+    background: white;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    box-shadow: 0px 0px 6px 0px #d7d7d7;
+    margin-top: 13px;
+    border-radius: 4px;
+}
+.header a:hover {
+    background: white;
+    color: black;
+}
+/* singleCard {
+    width: 33%;
+    display: flex;
+    background: white;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    box-shadow: 0px 0px 6px 0px #d7d7d7;
+    margin-top: 13px;
+    border-radius: 4px */;
+}
 </style>
 </head>
 <body>
-<h1>Select Your NetWork</h1>
+ <%Double Amount=(Double)session.getAttribute("amount");
+ if(Amount!=null){
+ %>
+ <h1>AvailableBalance:<%=Amount %></h1>
+ <%} %>
+<div class="header">
+<a href="Operator.jsp">Home</a>
+<a href="wallet.jsp">wallet</a>
+<a href="history.jsp">RechargeHistory</a>
+<a href="aboutus.jsp">AboutUs</a>
+<a href="contectus.jsp">ContectUs</a>
+<a href="logout.jsp">Logout</a>
+</div>
+<div align="center">
+ <h1>Select your Network</h1> 
+<div class="singleCard">
+<a href="planjiouser.jsp"><h1>Jio</h1></a>
+<img src="images/jiologo.jpg">
+</div>
+	<div class="singleCard">
+	<a href="planairteluser.jsp"><h1>Airtel</h1></a>
+	<img src="images/airtel logo.png">
+	</div>
+	<div class="singleCard">
+	<a href="planvodafoneUser.jsp"><h1>vodafone</h1></a>
+	<img src="images/VI-Logo-PNG.jpg">
+	</div>
+	<div class="singleCard">
+	<a href="planbsnluser.jsp"><h1>Bsnl</h1></a>
+	<img src="images/BSNL logo.png">
+	</div>
+</div>
 
-<nav>
-<a href="planjiouser.jsp"><h1>Jio</h1></a><br>
-<a href="planairteluser.jsp"><h1>Airtel</h1></a><br>
-<a href="planvodafoneUser.jsp"><h1>vodafone</h1></a><br>
-<a href="planbsnluser.jsp"><h1>Bsnl</h1></a><br>
-<a href="wallet.jsp"><h1>wallet</h1></a>
-</nav>
+
 <%User user =(User)session.getAttribute("CurrentUser");
 long validity=0;
 
@@ -69,6 +143,7 @@ long validity=0;
 		 System.out.println(planJio);
 		validity=Integer.valueOf(planJio.getValidity().split(" ")[0])-days;
 	    System.out.println ("Days: "+validity );
+	   
 		
 		
 	}
@@ -103,13 +178,18 @@ long validity=0;
 	}
 	}
 	
-	
 
 %>
 <%-- <%if(validity<=10) { %> --%>
 <h1><%=  validity %> Validity Recharge Fast</h1>
 
 
+
+
 <%-- <%} %> --%>
+	
+<!-- <script>
+alert("message")
+</script> -->
 </body>
 </html>

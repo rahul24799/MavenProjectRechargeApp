@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mobilerechargeapp.daoimpl.AdminDAOImpl;
 import com.mobilerechargeapp.daoimpl.UserDAOImpl;
+import com.mobilerechargeapp.exception.ErrorFound;
 import com.mobilerechargeapp.model.Admin;
 import com.mobilerechargeapp.model.User;
 
@@ -47,6 +48,7 @@ public class AdminController extends HttpServlet {
 		admin=adminDao.validateAdmin(emailId, password);
 		UserDAOImpl userDao=new UserDAOImpl ();
 	    user=userDao.validiateUser(emailId, password);
+	    try {
 		if(admin)
 		{
 			response.sendRedirect("adminhome.jsp");
@@ -55,12 +57,19 @@ public class AdminController extends HttpServlet {
 		{
 			HttpSession session=request.getSession();
 			session.setAttribute("CurrentUser", user);
+			session.setAttribute("amount",user.getWallet());
 			response.sendRedirect("Operator.jsp");
 		}
 		else
 		{
-			pw.write("invalid");
+		   throw new ErrorFound();
 		}
+	    }catch(ErrorFound e)
+	    {
+	    	HttpSession session=request.getSession();
+			session.setAttribute("invalid", e.getMessage());
+			response.sendRedirect("index.jsp");
+	    }
 		
 		
 	}

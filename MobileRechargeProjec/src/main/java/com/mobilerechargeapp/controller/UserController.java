@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mobilerechargeapp.daoimpl.OperatorDAOImpl;
 import com.mobilerechargeapp.daoimpl.UserDAOImpl;
+import com.mobilerechargeapp.exception.ErrorFound;
 import com.mobilerechargeapp.model.Operator;
 import com.mobilerechargeapp.model.User;
 import com.mobilerechargeapp.util.ConnectionClass;
@@ -42,7 +44,7 @@ public class UserController extends HttpServlet {
 		long phonenumber=Long.parseLong(request.getParameter("phonenumber"));
 		String password=request.getParameter("password");
 		String operatorName=request.getParameter("operatorName");
-		double wallet=Double.parseDouble(request.getParameter("wallet"));
+
 		OperatorDAOImpl operatorDao=new OperatorDAOImpl();
 		Operator operator=operatorDao.findOperator(operatorName);
 		Connection con=ConnectionClass.getConnection();
@@ -50,13 +52,23 @@ public class UserController extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		pw.write(username);
 		pw.write(email);
-		User user=new User(username,email,phonenumber,password,wallet,operator);
+		User user=new User(username,email,phonenumber,password,operator);
 		
     	UserDAOImpl userDao=new UserDAOImpl();
 		boolean b = userDao.insertUser(user);
-		
+		try {
 		if(b == true) {
 			response.sendRedirect("index.jsp");
+		}
+		else {
+			throw new ErrorFound();
+			
+		}
+		}catch(ErrorFound e)
+		{
+			HttpSession session=request.getSession();
+			session.setAttribute("email",e.getMessage2());
+			response.sendRedirect("register.jsp");
 		}
 	
 		
